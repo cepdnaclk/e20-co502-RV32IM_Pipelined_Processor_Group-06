@@ -1,4 +1,5 @@
-RISC-V Computer Architecture with Pipelined Implementation
+#RISC-V Computer Architecture with Pipelined Implementation
+
 This project focuses on implementing a RISC-V computer architecture with a pipelined design. RISC-V is a free and open Instruction Set Architecture (ISA) designed to support a wide range of applications, from microcontrollers to high-performance processors. Its simplicity, modularity, and extensibility make it an ideal platform for both academic and industrial purposes.
 
 In this implementation, we develop a pipelined architecture to enhance instruction throughput by overlapping the execution of multiple instructions. Key components include:
