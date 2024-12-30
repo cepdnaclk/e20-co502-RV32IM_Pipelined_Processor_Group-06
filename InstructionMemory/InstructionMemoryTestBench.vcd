@@ -1,0 +1,56 @@
+$date
+	Mon Dec 30 17:43:47 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module InstructionMemoryTestBench $end
+$var wire 32 ! instruction [31:0] $end
+$var reg 32 " pcAddress [31:0] $end
+$scope module uut $end
+$var wire 32 # instruction [31:0] $end
+$var wire 32 $ pcAddress [31:0] $end
+$var parameter 32 % memSize $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1111111111 %
+$end
+#0
+$dumpvars
+b0 $
+b10011 #
+b0 "
+b10011 !
+$end
+#10
+b10010011 !
+b10010011 #
+b100 "
+b100 $
+#20
+b100000000000100010011 !
+b100000000000100010011 #
+b1000 "
+b1000 $
+#30
+b1000001000000110110011 !
+b1000001000000110110011 #
+b1100 "
+b1100 $
+#40
+b1100010000000100110011 !
+b1100010000000100110011 #
+b10000 "
+b10000 $
+#50
+b1000000010000011010000110000011 !
+b1000000010000011010000110000011 #
+b10100 "
+b10100 $
+#60
