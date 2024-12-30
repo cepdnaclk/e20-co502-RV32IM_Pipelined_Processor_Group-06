@@ -13,6 +13,9 @@ module RegisterFile (
     // Register array (32 registers of 32 bits)
     reg [31:0] registers [31:0];
 
+    // Declare loop variable outside the procedural block for Verilog compatibility
+    integer i;
+
     // Read logic
     assign readData1 = (readReg1 != 0) ? registers[readReg1] : 32'b0; // R0 is always 0
     assign readData2 = (readReg2 != 0) ? registers[readReg2] : 32'b0;
@@ -21,7 +24,6 @@ module RegisterFile (
     always @(posedge clk or posedge rst) begin
         if (rst) begin
             // Reset all registers to 0
-            integer i;
             for (i = 0; i < 32; i = i + 1) begin
                 registers[i] <= 32'b0;
             end
