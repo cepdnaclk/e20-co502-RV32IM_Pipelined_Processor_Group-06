@@ -16,10 +16,12 @@ reg [31:0] instructionsMemory [0:MemSize];
 //Initialize the Instrunction Memory
 initial begin 
     //load the instructions to memory
-    instructionsMemory[0] <= 32'h00000000; //NOP
-    instructionsMemory[1] <= 32'h00000000; //NOP
-    instructionsMemory[2] <= 32'h00000000; //NOP
-    instructionsMemory[3] <= 32'h00000000; //NOP
+    instructionsMemory[0] <= 32'h00000013; // ADDI x0, x0, 0 (NOP)
+    instructionsMemory[1] <= 32'h00000093; // ADDI x1, x0, 0
+    instructionsMemory[2] <= 32'h00100113; // ADDI x2, x0, 1
+    instructionsMemory[3] <= 32'h002081B3; // ADD x3, x1, x2
+    instructionsMemory[4] <= 32'h00310133; // ADDI x2, x2, 3
+    instructionsMemory[5] <= 32'h4041A183; // SUB x3, x2, x1
 end
 
 //Read the Instrunction from the Instrunction Memory
