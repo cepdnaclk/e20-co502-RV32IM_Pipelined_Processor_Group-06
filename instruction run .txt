@@ -1,0 +1,5 @@
+iverilog -o DataMemory_tb.out DataMemory.v DataMemory_tb.v
+
+vvp DataMemory_tb.out
+
+gtkwave DataMemory_tb.vcd
