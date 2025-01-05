@@ -1,0 +1,321 @@
+$date
+	Sun Jan 05 11:43:16 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module control_unit_tb $end
+$var wire 1 ! WRITE_EN $end
+$var wire 2 " WB_METHOD [1:0] $end
+$var wire 1 # PC_SELECT $end
+$var wire 1 $ MEM_WRITE $end
+$var wire 1 % MEM_READ $end
+$var wire 1 & JUMP $end
+$var wire 1 ' JAL_SELECT $end
+$var wire 1 ( IMM_SELECT $end
+$var wire 3 ) IMM_PICK [2:0] $end
+$var wire 1 * DATA_MEM_SELECT $end
+$var wire 1 + BRANCH $end
+$var reg 3 , FUNC3 [2:0] $end
+$var reg 7 - FUNC7 [6:0] $end
+$var reg 7 . OPCODE [6:0] $end
+$scope module uut $end
+$var wire 3 / FUNC3 [2:0] $end
+$var wire 7 0 FUNC7 [6:0] $end
+$var wire 7 1 OPCODE [6:0] $end
+$var reg 1 + BRANCH $end
+$var reg 1 * DATA_MEM_SELECT $end
+$var reg 3 2 IMM_PICK [2:0] $end
+$var reg 1 ( IMM_SELECT $end
+$var reg 1 ' JAL_SELECT $end
+$var reg 1 & JUMP $end
+$var reg 1 % MEM_READ $end
+$var reg 1 $ MEM_WRITE $end
+$var reg 1 # PC_SELECT $end
+$var reg 2 3 WB_METHOD [1:0] $end
+$var reg 1 ! WRITE_EN $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 3
+b0 2
+b0 1
+b0 0
+b0 /
+b0 .
+b0 -
+b0 ,
+0+
+0*
+b0 )
+0(
+0'
+0&
+0%
+0$
+0#
+b0 "
+0!
+$end
+#10000
+1!
+b110011 .
+b110011 1
+#20000
+1!
+b100000 -
+b100000 0
+#30000
+1!
+b0 -
+b0 0
+b1 ,
+b1 /
+#40000
+1!
+b10 ,
+b10 /
+#50000
+1!
+b11 ,
+b11 /
+#60000
+1!
+b100 ,
+b100 /
+#70000
+1!
+b101 ,
+b101 /
+#80000
+1!
+b100000 -
+b100000 0
+#90000
+1!
+b0 -
+b0 0
+b110 ,
+b110 /
+#100000
+1!
+b111 ,
+b111 /
+#110000
+1%
+1(
+1!
+b0 ,
+b0 /
+b11 .
+b11 1
+#120000
+1(
+1%
+1!
+b1 ,
+b1 /
+#130000
+1(
+1%
+1!
+b10 ,
+b10 /
+#140000
+1(
+1%
+1!
+b100 ,
+b100 /
+#150000
+1(
+1%
+1!
+b101 ,
+b101 /
+#160000
+1&
+1'
+1(
+0%
+1!
+b0 ,
+b0 /
+b1100111 .
+b1100111 1
+#170000
+0'
+1(
+0&
+1!
+b10011 .
+b10011 1
+#180000
+1(
+1!
+b10 ,
+b10 /
+#190000
+1(
+1!
+b11 ,
+b11 /
+#200000
+1(
+1!
+b100 ,
+b100 /
+#210000
+1(
+1!
+b110 ,
+b110 /
+#220000
+1(
+1!
+b111 ,
+b111 /
+#230000
+1(
+1!
+b1 ,
+b1 /
+#240000
+1(
+1!
+b101 ,
+b101 /
+#250000
+1(
+1!
+b100000 -
+b100000 0
+#260000
+b1 )
+b1 2
+1$
+1(
+0!
+b0 ,
+b0 /
+b100011 .
+b100011 1
+#270000
+b1 "
+b1 3
+b1 )
+b1 2
+1(
+1$
+b1 ,
+b1 /
+#280000
+b1 )
+b1 2
+b10 "
+b10 3
+1(
+1$
+b10 ,
+b10 /
+#290000
+1!
+b10 )
+b10 2
+b0 "
+b0 3
+1(
+0$
+b110111 .
+b110111 1
+#300000
+1#
+b10 )
+b10 2
+1(
+1!
+b10111 .
+b10111 1
+#310000
+1+
+b11 )
+b11 2
+1(
+1#
+0!
+b0 ,
+b0 /
+b1100011 .
+b1100011 1
+#320000
+b11 )
+b11 2
+1(
+1#
+1+
+b1 ,
+b1 /
+#330000
+b11 )
+b11 2
+1(
+1#
+1+
+b100 ,
+b100 /
+#340000
+b11 )
+b11 2
+1(
+1#
+1+
+b101 ,
+b101 /
+#350000
+b11 )
+b11 2
+1(
+1#
+1+
+b110 ,
+b110 /
+#360000
+b11 )
+b11 2
+1(
+1#
+1+
+b111 ,
+b111 /
+#370000
+1!
+1'
+1&
+b100 )
+b100 2
+1(
+1#
+0+
+b1101111 .
+b1101111 1
+#380000
+b0 )
+b0 2
+0'
+1(
+0#
+0&
+1!
+b0 ,
+b0 /
+b10011 .
+b10011 1
+#390000

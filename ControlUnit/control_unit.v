@@ -1,12 +1,14 @@
 
-module control_unit(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH, JUMP, PC_SELECT, IMM_SELECT, JALR_SELECT, DATA_MEM_SELECT);
-    input [7:0] OPCODE, FUNC3, FUNC7;                         // mux 1  // mux 2         // select pc+4 // mux 4  
-    output reg WRITE_EN, MEM_WRITE, MEM_READ, BRANCH, JUMP, PC_SELECT, IMM_SELECT, JALR_SELECT,         DATA_MEM_SELECT;
+module control_unit(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH, JUMP, PC_SELECT, IMM_SELECT, JAL_SELECT, DATA_MEM_SELECT, WB_METHOD, IMM_PICK);
+    input [6:0] OPCODE, FUNC7;
+    input [2:0] FUNC3;
+    output reg WRITE_EN, MEM_WRITE, MEM_READ, BRANCH, JUMP, PC_SELECT, IMM_SELECT, JAL_SELECT, DATA_MEM_SELECT;
+    output reg [1:0] WB_METHOD;
+    output reg [2:0] IMM_PICK;
 
     // always block * to run the block whenever any input changes  
     always @(*)
     begin
-        // #1 // Decorder delay
         // Default values
         WRITE_EN = 1'b0;
         MEM_WRITE = 1'b0;
@@ -15,35 +17,22 @@ module control_unit(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
         JUMP = 1'b0;
         PC_SELECT = 1'b0;
         IMM_SELECT = 1'b0;
-        JALR_SELECT = 1'b0;
+        JAL_SELECT = 1'b0;
         DATA_MEM_SELECT = 1'b0;
+        WB_METHOD = 2'b00;
+        IMM_PICK = 3'b000;
 
         case (OPCODE)
 
-        // R-type
+        //////////////////////////////////////////////////// R-type //////////////////////////////////////////////////////////////////
         8'b0110011: 
             begin
                 WRITE_EN = 1'b1;
             end
-            // just incase for mult others needed
-            // case ({FUNC3, FUNC7})
-            // 11'b000_0000000: // ADD
-            // begin
-            //     WRITE_EN = 1'b1;
-            // end
-            // 11'b000_0100000: // SUB
-            // begin
-            //     WRITE_EN = 1'b1;
-            // end
-            // 11'b001_0000000: // SLL
-            // begin
-            //     WRITE_EN = 1'b1;
-            // end
-            // endcase
 
-        // I-type
+        //////////////////////////////////////////////////// I-type //////////////////////////////////////////////////////////////////
         8'b0000011: 
-            if (FUNC3 == 3'b000 || // LB,
+            if (FUNC3 == 3'b000 || // LB
                 FUNC3 == 3'b001 || // LH
                 FUNC3 == 3'b010 || // LW
                 FUNC3 == 3'b100 || // LBU
@@ -58,10 +47,10 @@ module control_unit(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
             3'b000: // JALR
             begin
                 WRITE_EN = 1'b1;
-                JALR_SELECT = 1'b1;
+                JAL_SELECT = 1'b1;
                 IMM_SELECT = 1'b1;
                 JUMP = 1'b1;
-
+                // Set the LSB of the calculated address to 0 to ensure it is word-aligned.
             end
             endcase
         8'b0010011:
@@ -76,87 +65,81 @@ module control_unit(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
                 IMM_SELECT = 1'b1;
             end
             
-            case ({FUNC7, FUNC3})
-            3'b0000000_001: // SLLI
+            else if ((FUNC7 == 7'b0000000 && FUNC3 == 3'b001) || // SLLI
+                (FUNC7 == 7'b0000000 && FUNC3 == 3'b101) || // SRLI
+                (FUNC7 == 7'b0100000 && FUNC3 == 3'b101))   // SRAI
             begin
                 WRITE_EN = 1'b1;
                 IMM_SELECT = 1'b1;
             end
-            3'b0000000_101: // SRLI
-            begin
-                WRITE_EN = 1'b1;
-                IMM_SELECT = 1'b1;
-            end
-            3'b0100000_101: // SRAI  
-            begin
-                WRITE_EN = 1'b1;
-                IMM_SELECT = 1'b1;
-            end
-            endcase
 
-
-        // S-type
+        //////////////////////////////////////////////////// S-type //////////////////////////////////////////////////////////////////
         8'b0100011: 
             case (FUNC3)
             3'b000: // SB
             begin
                 MEM_WRITE = 1'b1;
+                IMM_SELECT = 1'b1;
+                WB_METHOD = 2'b00;
+                IMM_PICK = 3'b001;
             end
             3'b001: // SH
             begin
                 MEM_WRITE = 1'b1;
+                IMM_SELECT = 1'b1;
+                WB_METHOD = 2'b01;
+                IMM_PICK = 3'b001;
             end
             3'b010: // SW
             begin
                 MEM_WRITE = 1'b1;
+                IMM_SELECT = 1'b1;
+                WB_METHOD = 2'b10;
+                IMM_PICK = 3'b001;
             end
             endcase
 
-        // U-type
+        //////////////////////////////////////////////////// U-type //////////////////////////////////////////////////////////////////
         8'b0110111: // LUI
             begin
             WRITE_EN = 1'b1;
+            IMM_PICK = 3'b010;
+            IMM_SELECT = 1'b1;
             end
         8'b0010111: // AUIPC
             begin
             WRITE_EN = 1'b1;
+            IMM_PICK = 3'b010;
+            IMM_SELECT = 1'b1;
+            PC_SELECT = 1'b1;
             end
 
-        // B-type
+        //////////////////////////////////////////////////// B-type //////////////////////////////////////////////////////////////////
         8'b1100011: 
-            case (FUNC3)
-            3'b000: // BEQ
+            if (FUNC3 == 3'b000 || // BEQ
+                FUNC3 == 3'b001 || // BNE
+                FUNC3 == 3'b100 || // BLT
+                FUNC3 == 3'b101 || // BGE
+                FUNC3 == 3'b110 || // BLTU
+                FUNC3 == 3'b111)   // BGEU
             begin
                 BRANCH = 1'b1;
+                PC_SELECT = 1'b1;
+                IMM_SELECT = 1'b1;
+                IMM_PICK = 3'b011;
             end
-            3'b001: // BNE
-            begin
-                BRANCH = 1'b1;
-            end
-            3'b100: // BLT
-            begin
-                BRANCH = 1'b1;
-            end
-            3'b101: // BGE
-            begin
-                BRANCH = 1'b1;
-            end
-            3'b110: // BLTU
-            begin
-                BRANCH = 1'b1;
-            end
-            3'b111: // BGEU
-            begin
-                BRANCH = 1'b1;
-            end
-            endcase
 
-        // J-type
+
+        //////////////////////////////////////////////////// J-type //////////////////////////////////////////////////////////////////
         8'b1101111: // JAL
             begin
             JUMP = 1'b1;
+            JAL_SELECT = 1'b1;
+            PC_SELECT = 1'b1;
+            IMM_SELECT = 1'b1;
+            IMM_PICK = 3'b100;
+            WRITE_EN = 1'b1;
             end
-
         endcase
 
 
