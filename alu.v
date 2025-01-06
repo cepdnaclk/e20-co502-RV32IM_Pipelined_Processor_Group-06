@@ -65,3 +65,16 @@ module or_1(DATA1,DATA2,orOut);
         #1 orOut = DATA1 | DATA2;
     end
 endmodule
+
+module left_shift(DATA1,DATA2, left_shift_out);
+
+    input [31:0] DATA1,DATA2;
+    output reg [31:0] left_shift_out;
+
+    always @(DATA1, DATA2) begin
+        
+        #2 left_shift_out = DATA1 << DATA2;
+    end
+
+
+endmodule
