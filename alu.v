@@ -2,7 +2,7 @@
 module alu(DATA1,DATA2,ALU_OPERATION,RESULT);
 
     input [31:0] DATA1,DATA2;
-    input [3:0] ALU_OPERATION;
+    input [5:0] ALU_OPERATION;
     output reg [31:0] RESULT;
 
     wire [31:0] subOut,addOut,andOut,orOut;
@@ -16,10 +16,17 @@ module alu(DATA1,DATA2,ALU_OPERATION,RESULT);
     begin
         case(ALU_OPERATION)
 
-        4'b0000  :RESULT=andOut;
-        4'b0001  :RESULT=orOut;
-        4'b0010  :RESULT=addOut;
-        4'b0110  :RESULT=subOut;
+        5'b00000  :RESULT=andOut;
+        5'b00001  :RESULT=orOut;
+        5'b00010  :RESULT=addOut;
+        5'b00011  :RESULT=subOut;
+        5'b00100  :RESULT=left_shift_out;
+        5'b00101  :RESULT=set_less_than_out; // SLT => Set Less Than(1/0)
+        5'b00110  :RESULT=set_less_than_unsigned_out; // SLT unsigned
+        5'b00111  :RESULT=xor_out;
+        5'b01000  :RESULT=logical_shift_right_out;
+        5'b01001  :RESULT=arithmetic_shift_right_out;
+
 
         endcase
 
@@ -78,3 +85,77 @@ module left_shift(DATA1,DATA2, left_shift_out);
 
 
 endmodule
+
+
+module set_less_than(DATA1,DATA2,set_less_than_out);
+
+    input [31:0] DATA1,DATA2;
+    output reg [31:0] set_less_than_out;
+
+    always @(DATA1, DATA2) begin
+
+        #1 if (&(signed)DATA1 < DATA2) begin
+            set_less_than_out = 1'b1;
+        else
+            set_less_than_out = 1'b0;
+        end
+    end
+
+endmodule
+
+
+module set_less_than_unsigned(DATA1,DATA2,set_less_than_unsigned_out);
+
+    input [31:0] DATA1,DATA2;
+    output reg [31:0] set_less_than_unsigned_out;
+
+    always @(DATA1, DATA2) begin
+
+        #1 if (DATA1 < DATA2) begin
+            set_less_than_out = 1'b1;
+        else
+            set_less_than_out = 1'b0;
+        end
+    end
+
+endmodule
+
+module xor(DATA1,DATA2,xor_out);
+
+    input [31:0] DATA1,DATA2;
+    output reg [31:0] xor_out;
+
+    always @(DATA1, DATA2) begin
+
+        #1 xor_out = DATA1 ^ DATA2 ;
+
+    end
+
+endmodule
+
+
+module shift_right_logical(DATA1,DATA2,logical_shift_right_out);
+
+    input [31:0] DATA1,DATA2;
+    output reg [31:0] logical_shift_right_out;
+
+    always @(DATA1, DATA2) begin
+
+        #2 logical_shift_right_out = DATA1 >> DATA2 ;
+
+    end
+endmodule
+
+
+module shift_right_arithmetic(
+    input [31:0] DATA1,
+    input [31:0] DATA2,
+    output reg [31:0] arithmetic_shift_right_out
+);
+
+    always @(DATA1, DATA2) begin
+        #2 arithmetic_shift_right_out = $signed(DATA1) >>> DATA2;
+    end
+
+endmodule
+
