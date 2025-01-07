@@ -19,7 +19,7 @@ module alu(DATA1,DATA2,ALU_OPERATION,RESULT);
     shift_right_logical shift_right_logical(DATA1,DATA2,logical_shift_right_out);
     shift_right_arithmetic shift_right_arithmetic(DATA1,DATA2,arithmetic_shift_right_out);
 
-    always @(ALU_OPERATION,subOut,addOut,andOut,orOut)
+    always @(*)
     begin
         case(ALU_OPERATION)
 
