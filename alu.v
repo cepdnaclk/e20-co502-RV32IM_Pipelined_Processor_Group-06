@@ -5,12 +5,19 @@ module alu(DATA1,DATA2,ALU_OPERATION,RESULT);
     input [5:0] ALU_OPERATION;
     output reg [31:0] RESULT;
 
-    wire [31:0] subOut,addOut,andOut,orOut;
+    wire [31:0] subOut,addOut,andOut,orOut,left_shift_out,set_less_than_out,
+    set_less_than_unsigned_out,xor_out,logical_shift_right_out,arithmetic_shift_right_out;
 
     and_1 and_1(DATA1,DATA2,andOut);
     sub_1 sub_1(DATA1,DATA2,subOut);
     add_1 add_1(DATA1,DATA2,addOut);
     or_1 or_1(DATA1,DATA2,orOut);
+    left_shift left_shift(DATA1,DATA2,left_shift_out);
+    set_less_than set_less_than(DATA1,DATA2,set_less_than_out);
+    set_less_than_unsigned set_less_than_unsigned(DATA1,DATA2,set_less_than_unsigned_out);
+    xor_module xor_1(DATA1,DATA2,xor_out);
+    shift_right_logical shift_right_logical(DATA1,DATA2,logical_shift_right_out);
+    shift_right_arithmetic shift_right_arithmetic(DATA1,DATA2,arithmetic_shift_right_out);
 
     always @(ALU_OPERATION,subOut,addOut,andOut,orOut)
     begin
@@ -73,89 +80,74 @@ module or_1(DATA1,DATA2,orOut);
     end
 endmodule
 
-module left_shift(DATA1,DATA2, left_shift_out);
+module left_shift(DATA1, DATA2, left_shift_out);
 
-    input [31:0] DATA1,DATA2;
+    input [31:0] DATA1, DATA2;
     output reg [31:0] left_shift_out;
 
     always @(DATA1, DATA2) begin
-        
-        #2 left_shift_out = DATA1 << DATA2;
+        #1 left_shift_out = DATA1 << DATA2;
     end
-
 
 endmodule
 
 
-module set_less_than(DATA1,DATA2,set_less_than_out);
+module set_less_than(DATA1, DATA2, set_less_than_out);
 
-    input [31:0] DATA1,DATA2;
+    input [31:0] DATA1, DATA2;
     output reg [31:0] set_less_than_out;
 
     always @(DATA1, DATA2) begin
-
-        #1 if (&(signed)DATA1 < DATA2) begin
-            set_less_than_out = 1'b1;
-        else
-            set_less_than_out = 1'b0;
+        #1 if ($signed(DATA1) < $signed(DATA2)) begin
+            set_less_than_out = 32'b1;
+        end else begin
+            set_less_than_out = 32'b0;
         end
     end
 
 endmodule
 
 
-module set_less_than_unsigned(DATA1,DATA2,set_less_than_unsigned_out);
+module set_less_than_unsigned(DATA1, DATA2, set_less_than_unsigned_out);
 
-    input [31:0] DATA1,DATA2;
+    input [31:0] DATA1, DATA2;
     output reg [31:0] set_less_than_unsigned_out;
 
     always @(DATA1, DATA2) begin
-
         #1 if (DATA1 < DATA2) begin
-            set_less_than_out = 1'b1;
-        else
-            set_less_than_out = 1'b0;
+            set_less_than_unsigned_out = 32'b1;
+        end else begin
+            set_less_than_unsigned_out = 32'b0;
         end
     end
 
 endmodule
 
-module xor(DATA1,DATA2,xor_out);
+module xor_module(DATA1, DATA2, xor_out);
 
-    input [31:0] DATA1,DATA2;
-    output reg [31:0] xor_out;
+    input [31:0] DATA1, DATA2;
+    output [31:0] xor_out;
 
-    always @(DATA1, DATA2) begin
-
-        #1 xor_out = DATA1 ^ DATA2 ;
-
-    end
+    assign xor_out = DATA1 ^ DATA2;
 
 endmodule
 
 
-module shift_right_logical(DATA1,DATA2,logical_shift_right_out);
+module shift_right_logical(DATA1, DATA2, logical_shift_right_out);
 
-    input [31:0] DATA1,DATA2;
-    output reg [31:0] logical_shift_right_out;
+    input [31:0] DATA1, DATA2;
+    output [31:0] logical_shift_right_out;
 
-    always @(DATA1, DATA2) begin
-
-        #2 logical_shift_right_out = DATA1 >> DATA2 ;
-
-    end
-endmodule
-
-
-module shift_right_arithmetic(
-    input [31:0] DATA1,
-    input [31:0] DATA2,
-    output reg [31:0] arithmetic_shift_right_out
-);
-
-    always @(DATA1, DATA2) begin
-        #2 arithmetic_shift_right_out = $signed(DATA1) >>> DATA2;
-    end
+    assign logical_shift_right_out = DATA1 >> DATA2;
 
 endmodule
 
+
+module shift_right_arithmetic(DATA1, DATA2, arithmetic_shift_right_out);
+
+    input [31:0] DATA1, DATA2;
+    output [31:0] arithmetic_shift_right_out;
+
+    assign arithmetic_shift_right_out = $signed(DATA1) >>> DATA2;
+
+endmodule
