@@ -1,0 +1,173 @@
+$date
+	Tue Jan 14 15:59:05 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module branch_control_unit_tb $end
+$var wire 32 ! TARGET_ADDRESS [31:0] $end
+$var wire 1 " BRANCH_SELECT $end
+$var reg 32 # ALU_RESULT [31:0] $end
+$var reg 1 $ BRANCH $end
+$var reg 3 % FUNC3 [2:0] $end
+$var reg 1 & JUMP $end
+$var reg 32 ' OUT1 [31:0] $end
+$var reg 32 ( OUT2 [31:0] $end
+$scope module uut $end
+$var wire 32 ) ALU_RESULT [31:0] $end
+$var wire 1 $ BRANCH $end
+$var wire 3 * FUNC3 [2:0] $end
+$var wire 1 & JUMP $end
+$var wire 32 + OUT1 [31:0] $end
+$var wire 32 , OUT2 [31:0] $end
+$var reg 1 " BRANCH_SELECT $end
+$var reg 32 - TARGET_ADDRESS [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 -
+b0 ,
+b0 +
+b0 *
+b0 )
+b0 (
+b0 '
+0&
+b0 %
+0$
+b0 #
+0"
+b0 !
+$end
+#10000
+1"
+b10000 !
+b10000 -
+b10000 #
+b10000 )
+1&
+#20000
+0"
+b0 !
+b0 -
+0&
+#30000
+1"
+b100000 !
+b100000 -
+b100000 #
+b100000 )
+b1 (
+b1 ,
+b1 '
+b1 +
+1$
+#40000
+0"
+b0 !
+b0 -
+0$
+#50000
+1"
+b110000 !
+b110000 -
+b110000 #
+b110000 )
+b10 (
+b10 ,
+b1 %
+b1 *
+1$
+#60000
+0"
+b0 !
+b0 -
+0$
+#70000
+1"
+b1000000 !
+b1000000 -
+b1000000 #
+b1000000 )
+b100 %
+b100 *
+1$
+#80000
+0"
+b0 !
+b0 -
+0$
+#90000
+1"
+b1010000 !
+b1010000 -
+b1010000 #
+b1010000 )
+b1 (
+b1 ,
+b10 '
+b10 +
+b101 %
+b101 *
+1$
+#100000
+0"
+b0 !
+b0 -
+0$
+#110000
+1"
+b1100000 !
+b1100000 -
+b1100000 #
+b1100000 )
+b10 (
+b10 ,
+b1 '
+b1 +
+b110 %
+b110 *
+1$
+#120000
+0"
+b0 !
+b0 -
+0$
+#130000
+1"
+b1110000 !
+b1110000 -
+b1110000 #
+b1110000 )
+b1 (
+b1 ,
+b10 '
+b10 +
+b111 %
+b111 *
+1$
+#140000
+0"
+b0 !
+b0 -
+0$
+#150000
+1"
+b10000000 !
+b10000000 -
+b10000000 #
+b10000000 )
+1&
+#160000
+0"
+b0 !
+b0 -
+0&
