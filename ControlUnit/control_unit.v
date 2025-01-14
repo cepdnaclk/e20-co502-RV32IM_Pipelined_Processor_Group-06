@@ -1,10 +1,10 @@
 
-module control_unit(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH, JUMP, PC_SELECT, IMM_SELECT, JAL_SELECT, DATA_MEM_SELECT, WB_METHOD, IMM_PICK);
+module control_unit(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH, JUMP, PC_SELECT, IMM_SELECT, JAL_SELECT, DATA_MEM_SELECT, WB_METHOD, IMM_PICK, ALU_OP);
     input [6:0] OPCODE, FUNC7;
     input [2:0] FUNC3;
     output reg WRITE_EN, MEM_WRITE, MEM_READ, BRANCH, JUMP, PC_SELECT, IMM_SELECT, JAL_SELECT, DATA_MEM_SELECT;
     output reg [1:0] WB_METHOD;
-    output reg [2:0] IMM_PICK;
+    output reg [2:0] IMM_PICK, ALU_OP;
 
     // always block * to run the block whenever any input changes  
     always @(*)
@@ -21,6 +21,7 @@ module control_unit(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
         DATA_MEM_SELECT = 1'b0;
         WB_METHOD = 2'b00;
         IMM_PICK = 3'b000;
+        ALU_OP = 3'b000;
 
         case (OPCODE)
 
@@ -36,11 +37,12 @@ module control_unit(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
                 FUNC3 == 3'b001 || // LH
                 FUNC3 == 3'b010 || // LW
                 FUNC3 == 3'b100 || // LBU
-                FUNC3 == 3'b101)    // LHU
+                FUNC3 == 3'b101)   // LHU
                 begin
                     IMM_SELECT = 1'b1;
                     WRITE_EN = 1'b1;
                     MEM_READ = 1'b1;
+                    ALU_OP = 3'b001;
                 end
         8'b1100111: 
             case (FUNC3)
@@ -50,6 +52,7 @@ module control_unit(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
                 JAL_SELECT = 1'b1;
                 IMM_SELECT = 1'b1;
                 JUMP = 1'b1;
+                ALU_OP = 3'b010;
                 // Set the LSB of the calculated address to 0 to ensure it is word-aligned.
             end
             endcase
@@ -63,6 +66,7 @@ module control_unit(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
             begin
                 WRITE_EN = 1'b1;
                 IMM_SELECT = 1'b1;
+                ALU_OP = 3'b011;
             end
             
             else if ((FUNC7 == 7'b0000000 && FUNC3 == 3'b001) || // SLLI
@@ -71,6 +75,7 @@ module control_unit(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
             begin
                 WRITE_EN = 1'b1;
                 IMM_SELECT = 1'b1;
+                ALU_OP = 3'b011;
             end
 
         //////////////////////////////////////////////////// S-type //////////////////////////////////////////////////////////////////
@@ -141,7 +146,6 @@ module control_unit(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
             WRITE_EN = 1'b1;
             end
         endcase
-
 
     end 
 

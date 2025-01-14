@@ -1,0 +1,54 @@
+$date
+	Tue Jan 14 16:22:14 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module load_processing_unit_tb $end
+$var wire 32 ! PROCESSED_DATA_OUT [31:0] $end
+$var reg 32 " DATA_OUT [31:0] $end
+$var reg 3 # FUNC3 [2:0] $end
+$scope module uut $end
+$var wire 32 $ DATA_OUT [31:0] $end
+$var wire 3 % FUNC3 [2:0] $end
+$var reg 32 & PROCESSED_DATA_OUT [31:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b1111000 &
+b0 %
+b10010001101000101011001111000 $
+b0 #
+b10010001101000101011001111000 "
+b1111000 !
+$end
+#10000
+b11111111111111111111111111111111 !
+b11111111111111111111111111111111 &
+b11111111111111111111111111111111 "
+b11111111111111111111111111111111 $
+#30000
+b1 #
+b1 %
+#50000
+b10 #
+b10 %
+#70000
+b11111111 !
+b11111111 &
+b100 #
+b100 %
+#90000
+b1111111111111111 !
+b1111111111111111 &
+b101 #
+b101 %
+#100000
