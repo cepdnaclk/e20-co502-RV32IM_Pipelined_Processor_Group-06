@@ -1,28 +1,34 @@
-module DataMemory (
-    input wire clk,                     // Clock signal
-    input wire [31:0] address,          // Address for data memory
-    input wire [31:0] writeData,        // Data to write into memory
-    input wire memWrite,                // Write enable signal
-    input wire memRead,                 // Read enable signal
-    output reg [31:0] readData          // Data read from memory
+module DATA_MEMORY (
+    input wire CLK,                     // Clock signal
+    input wire [31:0] ADDRESS,          // Address for data memory
+    input wire [31:0] WRITE_DATA,       // Data to write into memory
+    input wire MEM_WRITE,               // Write enable signal
+    input wire MEM_READ,                // Read enable signal
+    input wire [2:0] FUNC3,             // Function code to determine store type
+    output reg [31:0] READ_DATA         // Data read from memory
 );
     // Data Memory size
-    parameter memSize = 1024;
-    reg [31:0] dataMem[0:memSize-1];
+    parameter MEM_SIZE = 1024;
+    reg [31:0] DATA_MEM[0:MEM_SIZE-1];
 
     // Memory write operation
-    always @(posedge clk) begin
-        if (memWrite) begin
-            dataMem[address[11:2]] <= writeData; // Write data to indexed memory
+    always @(posedge CLK) begin
+        if (MEM_WRITE) begin
+            case (FUNC3)
+                3'b000: DATA_MEM[ADDRESS[11:2]][7:0] <= WRITE_DATA[7:0];   // SB
+                3'b001: DATA_MEM[ADDRESS[11:2]][15:0] <= WRITE_DATA[15:0]; // SH
+                3'b010: DATA_MEM[ADDRESS[11:2]] <= WRITE_DATA;             // SW
+                default: DATA_MEM[ADDRESS[11:2]] <= WRITE_DATA;            // Default to SW
+            endcase
         end
     end
 
     // Memory read operation
     always @(*) begin
-        if (memRead) begin
-            readData = dataMem[address[11:2]]; // Asynchronous read
+        if (MEM_READ) begin
+            READ_DATA = DATA_MEM[ADDRESS[11:2]]; // Asynchronous read
         end else begin
-            readData = 32'b0; // Default value when read is disabled
+            READ_DATA = 32'b0; // Default value when read is disabled
         end
     end
 endmodule

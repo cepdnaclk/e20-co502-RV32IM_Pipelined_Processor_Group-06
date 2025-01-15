@@ -9,7 +9,7 @@ module imm_pick_tb;
     wire [31:0] IMMIDIATE;
 
     // Instantiate the Unit Under Test (UUT)
-    imm_pick uut (
+    IMM_PICK uut (
         .INSTRUCTION(INSTRUCTION), 
         .IMM_PICK(IMM_PICK), 
         .IMMIDIATE(IMMIDIATE)

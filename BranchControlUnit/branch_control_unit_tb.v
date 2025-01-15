@@ -14,7 +14,7 @@ module branch_control_unit_tb;
     wire BRANCH_SELECT;
 
     // Instantiate the Unit Under Test (UUT)
-    branch_control_unit uut (
+    BRANCH_CONTROL_UNIT uut (
         .JUMP(JUMP),
         .BRANCH(BRANCH),
         .FUNC3(FUNC3),

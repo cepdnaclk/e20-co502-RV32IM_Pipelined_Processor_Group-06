@@ -1,4 +1,4 @@
-module branch_control_unit(
+module BRANCH_CONTROL_UNIT(
     input wire JUMP,
     input wire BRANCH,
     input wire [2:0] FUNC3,

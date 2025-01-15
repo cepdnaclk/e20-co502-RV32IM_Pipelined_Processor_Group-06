@@ -1,4 +1,4 @@
-module imm_pick(
+module IMM_PICK(
     input [31:0] INSTRUCTION,
     input [2:0] IMM_PICK,
     output reg [31:0] IMMIDIATE

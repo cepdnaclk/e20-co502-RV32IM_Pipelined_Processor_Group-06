@@ -3,7 +3,6 @@ module control_unit(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
     input [6:0] OPCODE, FUNC7;
     input [2:0] FUNC3;
     output reg WRITE_EN, MEM_WRITE, MEM_READ, BRANCH, JUMP, PC_SELECT, IMM_SELECT, JAL_SELECT, DATA_MEM_SELECT;
-    output reg [1:0] WB_METHOD;
     output reg [2:0] IMM_PICK, ALU_OP;
 
     // always block * to run the block whenever any input changes  
@@ -19,7 +18,6 @@ module control_unit(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
         IMM_SELECT = 1'b0;
         JAL_SELECT = 1'b0;
         DATA_MEM_SELECT = 1'b0;
-        WB_METHOD = 2'b00;
         IMM_PICK = 3'b000;
         ALU_OP = 3'b000;
 
@@ -85,21 +83,18 @@ module control_unit(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
             begin
                 MEM_WRITE = 1'b1;
                 IMM_SELECT = 1'b1;
-                WB_METHOD = 2'b00;
                 IMM_PICK = 3'b001;
             end
             3'b001: // SH
             begin
                 MEM_WRITE = 1'b1;
                 IMM_SELECT = 1'b1;
-                WB_METHOD = 2'b01;
                 IMM_PICK = 3'b001;
             end
             3'b010: // SW
             begin
                 MEM_WRITE = 1'b1;
                 IMM_SELECT = 1'b1;
-                WB_METHOD = 2'b10;
                 IMM_PICK = 3'b001;
             end
             endcase
