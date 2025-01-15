@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module load_processing_unit_tb;
+module LOAD_PROCESSING_UNIT_TB;
     // Inputs
     reg [2:0] FUNC3;
     reg [31:0] DATA_OUT;
@@ -9,7 +9,7 @@ module load_processing_unit_tb;
     wire [31:0] PROCESSED_DATA_OUT;
 
     // Instantiate the Unit Under Test (UUT)
-    load_processing_unit uut (
+    LOAD_PROCESSING_UNIT uut (
         .FUNC3(FUNC3),
         .DATA_OUT(DATA_OUT),
         .PROCESSED_DATA_OUT(PROCESSED_DATA_OUT)

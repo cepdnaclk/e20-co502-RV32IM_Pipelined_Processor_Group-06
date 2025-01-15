@@ -1,4 +1,4 @@
-module load_processing_unit(
+module LOAD_PROCESSING_UNIT(
     input wire [2:0] FUNC3,
     input wire [31:0] DATA_OUT,
     output reg [31:0] PROCESSED_DATA_OUT
