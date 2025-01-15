@@ -1,0 +1,168 @@
+$date
+	Wed Jan 15 14:50:48 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module IFTestBench $end
+$var wire 32 ! PCPLUS4 [31:0] $end
+$var wire 32 " INSTRUCTION [31:0] $end
+$var wire 32 # IF_PC [31:0] $end
+$var reg 1 $ CLK $end
+$var reg 32 % PCADDRESS [31:0] $end
+$var reg 1 & RST $end
+$scope module UUT $end
+$var wire 1 $ CLK $end
+$var wire 32 ' IF_PC [31:0] $end
+$var wire 32 ( IF_PC_PLUS4 [31:0] $end
+$var wire 32 ) NEXT_PC [31:0] $end
+$var wire 1 & RST $end
+$var wire 32 * PC_PLUS4 [31:0] $end
+$var wire 32 + PC [31:0] $end
+$var wire 32 , IF_INSTRUCTION [31:0] $end
+$scope module PC_INST $end
+$var wire 1 $ CLK $end
+$var wire 32 - NEXT_PC [31:0] $end
+$var wire 1 & RST $end
+$var wire 32 . PC_PLUS4 [31:0] $end
+$var reg 32 / PC [31:0] $end
+$upscope $end
+$scope module instruction_memory $end
+$var wire 32 0 ADDRESS [31:0] $end
+$var wire 32 1 INSTRUCTION [31:0] $end
+$var parameter 32 2 MEM_SIZE $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b10000000000 2
+$end
+#0
+$dumpvars
+b10011 1
+b0 0
+b0 /
+b100 .
+b0 -
+b10011 ,
+b0 +
+b100 *
+b0 )
+b100 (
+b0 '
+1&
+b0 %
+0$
+b0 #
+b10011 "
+b100 !
+$end
+#5
+1$
+#10
+0$
+0&
+#15
+1$
+#20
+0$
+b100 %
+b100 )
+b100 -
+#25
+b1000 !
+b1000 (
+b1000 *
+b1000 .
+b10010011 "
+b10010011 ,
+b10010011 1
+b100 #
+b100 '
+b100 +
+b100 /
+b100 0
+1$
+#30
+0$
+b1000 %
+b1000 )
+b1000 -
+#35
+b1100 !
+b1100 (
+b1100 *
+b1100 .
+b100000000000100010011 "
+b100000000000100010011 ,
+b100000000000100010011 1
+b1000 #
+b1000 '
+b1000 +
+b1000 /
+b1000 0
+1$
+#40
+0$
+b1100 %
+b1100 )
+b1100 -
+#45
+b10000 !
+b10000 (
+b10000 *
+b10000 .
+b1000001000000110110011 "
+b1000001000000110110011 ,
+b1000001000000110110011 1
+b1100 #
+b1100 '
+b1100 +
+b1100 /
+b1100 0
+1$
+#50
+0$
+b10000 %
+b10000 )
+b10000 -
+#55
+b10100 !
+b10100 (
+b10100 *
+b10100 .
+b1100010000000100110011 "
+b1100010000000100110011 ,
+b1100010000000100110011 1
+b10000 #
+b10000 '
+b10000 +
+b10000 /
+b10000 0
+1$
+#60
+0$
+b10100 %
+b10100 )
+b10100 -
+#65
+b11000 !
+b11000 (
+b11000 *
+b11000 .
+b1000000010000011010000110000011 "
+b1000000010000011010000110000011 ,
+b1000000010000011010000110000011 1
+b10100 #
+b10100 '
+b10100 +
+b10100 /
+b10100 0
+1$
+#70
+0$

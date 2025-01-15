@@ -1,7 +1,7 @@
 // Instruction Memory module
 // Group 06
 
-module InstructionMemory (
+module INSTRUCTION_MEMORY (
     input wire [31:0] ADDRESS, // Program Counter
     output wire [31:0] INSTRUCTION // Instruction
 );
