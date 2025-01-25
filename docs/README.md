@@ -9,7 +9,7 @@ title: RV32IM Pipelined Processor
 
 [comment]: # "This is the standard layout for the project, but you can clean this and use your own template"
 
-# Project Title
+# RISC-V 32 IM Pipelined Processor
 
 ---
 
