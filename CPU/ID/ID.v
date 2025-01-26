@@ -61,7 +61,7 @@ module ID (
     );
 
     // Immediate Generator
-    IMMEDIATE_GENERATOR immediate_generator (
+    IMM_PICK imm_pick (
         .INSTRUCTION(IF_INSTRUCTION),
         .IMM_PICK(IMM_PICK),
         .IMMEDIATE(ID_IMMEDIATE)
