@@ -46,7 +46,7 @@ module WB_tb;
         #10;
         RST = 0;
 
-        // Test case 1: Write enable with data memory select
+        // Test case 1: Write enable with data memory select (LW)
         MEM_FUNC3 = 3'b010; // LW
         MEM_WRITE_ENABLE = 1;
         MEM_DATA_MEM_SELECT = 1;
@@ -64,6 +64,38 @@ module WB_tb;
         MEM_WRITE_ENABLE = 0;
         #10;
 
+        // Test case 4: Load Byte (LB)
+        MEM_FUNC3 = 3'b000; // LB
+        MEM_WRITE_ENABLE = 1;
+        MEM_DATA_MEM_SELECT = 1;
+        MEM_DATA_OUT = 32'h000A00FA;
+        MEM_RD = 5'b00010;
+        #10;
+
+        // Test case 5: Load Halfword (LH)
+        MEM_FUNC3 = 3'b001; // LH
+        MEM_WRITE_ENABLE = 1;
+        MEM_DATA_MEM_SELECT = 1;
+        MEM_DATA_OUT = 32'h0F00FAFF;
+        MEM_RD = 5'b00011;
+        #10;
+
+        // Test case 6: Load Byte Unsigned (LBU)
+        MEM_FUNC3 = 3'b100; // LBU
+        MEM_WRITE_ENABLE = 1;
+        MEM_DATA_MEM_SELECT = 1;
+        MEM_DATA_OUT = 32'h000000FF;
+        MEM_RD = 5'b00100;
+        #10;
+
+        // Test case 7: Load Halfword Unsigned (LHU)
+        MEM_FUNC3 = 3'b101; // LHU
+        MEM_WRITE_ENABLE = 1;
+        MEM_DATA_MEM_SELECT = 1;
+        MEM_DATA_OUT = 32'h0000FFFF;
+        MEM_RD = 5'b00101;
+        #10;
+
         // Finish simulation
         $finish;
     end
@@ -78,7 +110,7 @@ module WB_tb;
     end
 
 endmodule
-  
+
 // command to run simulation
 // iverilog -o WB_tb.vvp WB_tb.v WB.v ../../LoadProcessingUnit/LOAD_PROCESSING_UNIT.v ../../MUX/MUX.v
 // vvp WB_tb.vvp
