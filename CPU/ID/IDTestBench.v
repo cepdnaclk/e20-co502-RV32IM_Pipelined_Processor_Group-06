@@ -92,3 +92,6 @@ module IDTestBench;
     always #10 CLK = ~CLK;
 
 endmodule
+
+
+// iverilog -o IDTestBench.vvp ID.v IDTestBench.v ../../ControlUnit/control_unit.v ../../Registers/RegisterFile.v IMMEDIATE_GENERATOR.v ALU_CONTROL.v ../../Programcounter/ProgramCounter.v ../../Memory/InstructionMemory.v
