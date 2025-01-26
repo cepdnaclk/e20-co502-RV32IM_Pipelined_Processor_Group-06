@@ -1,0 +1,126 @@
+$date
+	Sat Jan 25 21:23:28 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module WB_tb $end
+$var wire 1 ! WB_WRITE_ENABLE $end
+$var wire 32 " WB_WRITE_DATA [31:0] $end
+$var wire 5 # WB_RD [4:0] $end
+$var reg 1 $ CLK $end
+$var reg 1 % MEM_DATA_MEM_SELECT $end
+$var reg 32 & MEM_DATA_OUT [31:0] $end
+$var reg 3 ' MEM_FUNC3 [2:0] $end
+$var reg 32 ( MEM_JAL_SELECTED [31:0] $end
+$var reg 5 ) MEM_RD [4:0] $end
+$var reg 1 * MEM_WRITE_ENABLE $end
+$var reg 1 + RST $end
+$scope module uut $end
+$var wire 1 $ CLK $end
+$var wire 1 % MEM_DATA_MEM_SELECT $end
+$var wire 32 , MEM_DATA_OUT [31:0] $end
+$var wire 3 - MEM_FUNC3 [2:0] $end
+$var wire 32 . MEM_JAL_SELECTED [31:0] $end
+$var wire 5 / MEM_RD [4:0] $end
+$var wire 1 * MEM_WRITE_ENABLE $end
+$var wire 1 + RST $end
+$var wire 5 0 WB_RD [4:0] $end
+$var wire 1 ! WB_WRITE_ENABLE $end
+$var wire 32 1 WB_WRITE_DATA [31:0] $end
+$var wire 32 2 PROCESSED_DATA_OUT [31:0] $end
+$scope module data_mem_select $end
+$var wire 32 3 IN0 [31:0] $end
+$var wire 1 % SEL $end
+$var wire 32 4 OUT [31:0] $end
+$var wire 32 5 IN1 [31:0] $end
+$upscope $end
+$scope module load_processing_unit $end
+$var wire 32 6 DATA_OUT [31:0] $end
+$var wire 3 7 FUNC3 [2:0] $end
+$var reg 32 8 PROCESSED_DATA_OUT [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 8
+b0 7
+b0 6
+b0 5
+b0 4
+b0 3
+b0 2
+b0 1
+b0 0
+b0 /
+b0 .
+b0 -
+b0 ,
+1+
+0*
+b0 )
+b0 (
+b0 '
+b0 &
+0%
+0$
+b0 #
+b0 "
+0!
+$end
+#5000
+1$
+#10000
+b11011110101011011011111011101111 "
+b11011110101011011011111011101111 1
+b11011110101011011011111011101111 4
+b11011110101011011011111011101111 2
+b11011110101011011011111011101111 5
+b11011110101011011011111011101111 8
+0$
+b1 #
+b1 0
+b1 )
+b1 /
+b11011110101011011011111011101111 &
+b11011110101011011011111011101111 ,
+b11011110101011011011111011101111 6
+b100 (
+b100 .
+b100 3
+1%
+1!
+1*
+b10 '
+b10 -
+b10 7
+0+
+#15000
+1$
+#20000
+b11001010111111101011101010111110 "
+b11001010111111101011101010111110 1
+b11001010111111101011101010111110 4
+0$
+b11001010111111101011101010111110 (
+b11001010111111101011101010111110 .
+b11001010111111101011101010111110 3
+0%
+#25000
+1$
+#30000
+0$
+0!
+0*
+#35000
+1$
+#40000
+0$

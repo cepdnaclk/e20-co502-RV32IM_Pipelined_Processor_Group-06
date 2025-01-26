@@ -39,16 +39,18 @@ module CPU (
     wire [31:0] PC;
     wire [31:0] PC_PLUS4;
 
-    PROGRAM_COUNTER PC_INST (
+    // IF stage
+    IF if_stage (
         .CLK(CLK),
         .RST(RST),
         .NEXT_PC(NEXT_PC),
-        .PC(PC),
-        .PC_PLUS4(PC_PLUS4)
+        .IF_PC(IF_PC),
+        .IF_PC_PLUS4(IF_PC_PLUS4),
+        .IF_INSTRUCTION(IF_INSTRUCTION)
     );
 
-    // Instantiate pipeline registers
-    IF_ID IF_ID (
+    // ID stage
+    ID id_stage (
         .CLK(CLK),
         .RST(RST),
         .IF_PC(IF_PC),
@@ -56,19 +58,35 @@ module CPU (
         .IF_PC_PLUS4(IF_PC_PLUS4),
         .ID_PC(ID_PC),
         .ID_INSTRUCTION(ID_INSTRUCTION),
-        .ID_PC_PLUS4(ID_PC_PLUS4)
+        .ID_PC_PLUS4(ID_PC_PLUS4),
+        .ID_READ_DATA1(ID_READ_DATA1),
+        .ID_READ_DATA2(ID_READ_DATA2),
+        .ID_IMMEDIATE(ID_IMMEDIATE),
+        .ID_RD(ID_RD),
+        .ID_FUNC3(ID_FUNC3),
+        .ID_FUNC7(ID_FUNC7),
+        .ID_ALU_CONTROL(ID_ALU_CONTROL),
+        .ID_WRITE_ENABLE(ID_WRITE_ENABLE),
+        .ID_DATA_MEM_SELECT(ID_DATA_MEM_SELECT),
+        .ID_MEM_WRITE(ID_MEM_WRITE),
+        .ID_MEM_READ(ID_MEM_READ),
+        .ID_JAL_SELECT(ID_JAL_SELECT),
+        .ID_IMM_SELECT(ID_IMM_SELECT),
+        .ID_PC_SELECT(ID_PC_SELECT),
+        .ID_BRANCH(ID_BRANCH),
+        .ID_JUMP(ID_JUMP)
     );
 
-    ID_EX ID_EX (
+    // EX stage
+    EX ex_stage (
         .CLK(CLK),
         .RST(RST),
         .ID_PC(ID_PC),
         .ID_READ_DATA1(ID_READ_DATA1),
         .ID_READ_DATA2(ID_READ_DATA2),
         .ID_IMMEDIATE(ID_IMMEDIATE),
-        .ID_WRITE_ADDR(ID_RD),
+        .ID_RD(ID_RD),
         .ID_FUNC3(ID_FUNC3),
-        .ID_PC_PLUS4(ID_PC_PLUS4),
         .ID_ALU_CONTROL(ID_ALU_CONTROL),
         .ID_WRITE_ENABLE(ID_WRITE_ENABLE),
         .ID_DATA_MEM_SELECT(ID_DATA_MEM_SELECT),
@@ -79,13 +97,13 @@ module CPU (
         .ID_PC_SELECT(ID_PC_SELECT),
         .ID_BRANCH(ID_BRANCH),
         .ID_JUMP(ID_JUMP),
+        .ID_PC_PLUS4(ID_PC_PLUS4),
         .EX_PC(EX_PC),
         .EX_READ_DATA1(EX_READ_DATA1),
         .EX_READ_DATA2(EX_READ_DATA2),
         .EX_IMMEDIATE(EX_IMMEDIATE),
-        .EX_WRITE_ADDR(EX_RD),
+        .EX_RD(EX_RD),
         .EX_FUNC3(EX_FUNC3),
-        .EX_PC_PLUS4(EX_PC_PLUS4),
         .EX_ALU_CONTROL(EX_ALU_CONTROL),
         .EX_WRITE_ENABLE(EX_WRITE_ENABLE),
         .EX_DATA_MEM_SELECT(EX_DATA_MEM_SELECT),
@@ -95,15 +113,18 @@ module CPU (
         .EX_IMM_SELECT(EX_IMM_SELECT),
         .EX_PC_SELECT(EX_PC_SELECT),
         .EX_BRANCH(EX_BRANCH),
-        .EX_JUMP(EX_JUMP)
+        .EX_JUMP(EX_JUMP),
+        .EX_ALU_RESULT(EX_ALU_RESULT),
+        .EX_PC_PLUS4(EX_PC_PLUS4)
     );
 
-    EX_MEM EX_MEM (
+    // MEM stage
+    MEM mem_stage (
         .CLK(CLK),
         .RST(RST),
         .EX_ALU_RESULT(EX_ALU_RESULT),
         .EX_READ_DATA2(EX_READ_DATA2),
-        .EX_WRITE_ADDR(EX_RD),
+        .EX_RD(EX_RD),
         .EX_MEM_WRITE(EX_MEM_WRITE),
         .EX_MEM_READ(EX_MEM_READ),
         .EX_FUNC3(EX_FUNC3),
@@ -111,7 +132,7 @@ module CPU (
         .EX_DATA_MEM_SELECT(EX_DATA_MEM_SELECT),
         .MEM_ALU_RESULT(MEM_ALU_RESULT),
         .MEM_READ_DATA2(MEM_READ_DATA2),
-        .MEM_WRITE_ADDR(MEM_RD),
+        .MEM_RD(MEM_RD),
         .MEM_MEM_WRITE(MEM_MEM_WRITE),
         .MEM_MEM_READ(MEM_MEM_READ),
         .MEM_FUNC3(MEM_FUNC3),

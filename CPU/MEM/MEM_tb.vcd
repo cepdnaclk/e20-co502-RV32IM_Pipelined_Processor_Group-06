@@ -1,0 +1,295 @@
+$date
+	Sat Jan 25 18:27:27 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module MEM_tb $end
+$var wire 1 ! MEM_WRITE_ENABLE $end
+$var wire 5 " MEM_RD [4:0] $end
+$var wire 32 # MEM_JAL_SELECTED [31:0] $end
+$var wire 3 $ MEM_FUNC3 [2:0] $end
+$var wire 32 % MEM_DATA_OUT [31:0] $end
+$var wire 1 & MEM_DATA_MEM_SELECT $end
+$var reg 1 ' CLK $end
+$var reg 1 ( EX_DATA_MEM_SELECT $end
+$var reg 3 ) EX_FUNC3 [2:0] $end
+$var reg 32 * EX_JAL_SELECTED [31:0] $end
+$var reg 1 + EX_MEM_READ $end
+$var reg 1 , EX_MEM_WRITE $end
+$var reg 5 - EX_RD [4:0] $end
+$var reg 32 . EX_READ_DATA2 [31:0] $end
+$var reg 1 / EX_WRITE_ENABLE $end
+$var reg 1 0 RST $end
+$scope module uut $end
+$var wire 1 ' CLK $end
+$var wire 1 ( EX_DATA_MEM_SELECT $end
+$var wire 3 1 EX_FUNC3 [2:0] $end
+$var wire 32 2 EX_JAL_SELECTED [31:0] $end
+$var wire 1 + EX_MEM_READ $end
+$var wire 1 , EX_MEM_WRITE $end
+$var wire 5 3 EX_RD [4:0] $end
+$var wire 32 4 EX_READ_DATA2 [31:0] $end
+$var wire 1 / EX_WRITE_ENABLE $end
+$var wire 1 & MEM_DATA_MEM_SELECT $end
+$var wire 3 5 MEM_FUNC3 [2:0] $end
+$var wire 32 6 MEM_JAL_SELECTED [31:0] $end
+$var wire 5 7 MEM_RD [4:0] $end
+$var wire 1 ! MEM_WRITE_ENABLE $end
+$var wire 1 0 RST $end
+$var wire 32 8 MEM_DATA_OUT [31:0] $end
+$scope module data_memory $end
+$var wire 32 9 ADDRESS [31:0] $end
+$var wire 1 ' CLK $end
+$var wire 3 : FUNC3 [2:0] $end
+$var wire 1 + MEM_READ $end
+$var wire 1 , MEM_WRITE $end
+$var wire 32 ; WRITE_DATA [31:0] $end
+$var parameter 32 < MEM_SIZE $end
+$var reg 32 = READ_DATA [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b10000000000 <
+$end
+#0
+$dumpvars
+b0 =
+b0 ;
+b0 :
+b0 9
+b0 8
+b0 7
+b0 6
+b0 5
+b0 4
+b0 3
+b0 2
+b0 1
+10
+0/
+b0 .
+b0 -
+0,
+0+
+b0 *
+b0 )
+0(
+0'
+0&
+b0 %
+b0 $
+b0 #
+b0 "
+0!
+$end
+#5000
+1'
+#10000
+0'
+b10 $
+b10 5
+b10 )
+b10 1
+b10 :
+1,
+b11011110101011011011111011101111 .
+b11011110101011011011111011101111 4
+b11011110101011011011111011101111 ;
+b100 #
+b100 6
+b100 *
+b100 2
+b100 9
+00
+#15000
+1'
+#20000
+b11011110101011011011111011101111 %
+b11011110101011011011111011101111 8
+b11011110101011011011111011101111 =
+0'
+1+
+0,
+#25000
+1'
+#30000
+b0 %
+b0 8
+b0 =
+0'
+1,
+b11001010111111101011101010111110 .
+b11001010111111101011101010111110 4
+b11001010111111101011101010111110 ;
+b1000 #
+b1000 6
+b1000 *
+b1000 2
+b1000 9
+0+
+#35000
+1'
+#40000
+b11001010111111101011101010111110 %
+b11001010111111101011101010111110 8
+b11001010111111101011101010111110 =
+0'
+1+
+0,
+#45000
+1'
+#50000
+b0 %
+b0 8
+b0 =
+0'
+b1 $
+b1 5
+b1 )
+b1 1
+b1 :
+1,
+b110000001011111011101111 .
+b110000001011111011101111 4
+b110000001011111011101111 ;
+b1100 #
+b1100 6
+b1100 *
+b1100 2
+b1100 9
+0+
+#55000
+1'
+#60000
+bx1011111011101111 %
+bx1011111011101111 8
+bx1011111011101111 =
+0'
+1+
+0,
+#65000
+1'
+#70000
+b0 %
+b0 8
+b0 =
+0'
+b0 $
+b0 5
+b0 )
+b0 1
+b0 :
+1,
+b11101111 .
+b11101111 4
+b11101111 ;
+b10000 #
+b10000 6
+b10000 *
+b10000 2
+b10000 9
+0+
+#75000
+1'
+#80000
+bx11101111 %
+bx11101111 8
+bx11101111 =
+0'
+1+
+0,
+#85000
+1'
+#90000
+b0 %
+b0 8
+b0 =
+0'
+b1 $
+b1 5
+b1 )
+b1 1
+b1 :
+1,
+b1011111011101111 .
+b1011111011101111 4
+b1011111011101111 ;
+b10100 #
+b10100 6
+b10100 *
+b10100 2
+b10100 9
+0+
+#95000
+1'
+#100000
+bx1011111011101111 %
+bx1011111011101111 8
+bx1011111011101111 =
+0'
+1+
+0,
+#105000
+1'
+#110000
+b0 %
+b0 8
+b0 =
+0'
+b10 $
+b10 5
+b10 )
+b10 1
+b10 :
+1,
+b11011110101011011011111011101111 .
+b11011110101011011011111011101111 4
+b11011110101011011011111011101111 ;
+b11000 #
+b11000 6
+b11000 *
+b11000 2
+b11000 9
+0+
+#115000
+1'
+#120000
+b11011110101011011011111011101111 %
+b11011110101011011011111011101111 8
+b11011110101011011011111011101111 =
+0'
+1+
+0,
+#125000
+1'
+#130000
+b11001010111111101011101010111110 %
+b11001010111111101011101010111110 8
+b11001010111111101011101010111110 =
+0'
+b1 $
+b1 5
+b1 )
+b1 1
+b1 :
+b1000 #
+b1000 6
+b1000 *
+b1000 2
+b1000 9
+1+
+#135000
+1'
+#140000
+b0 %
+b0 8
+b0 =
+0'
+0+

@@ -41,6 +41,7 @@ module control_unit(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
                     WRITE_EN = 1'b1;
                     MEM_READ = 1'b1;
                     ALU_OP = 3'b001;
+                    DATA_MEM_SELECT = 1'b1;
                 end
         8'b1100111: 
             case (FUNC3)

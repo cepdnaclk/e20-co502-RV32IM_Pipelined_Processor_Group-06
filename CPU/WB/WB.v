@@ -7,9 +7,10 @@ module WB (
     input wire [31:0] MEM_JAL_SELECTED,
     input wire [31:0] MEM_DATA_OUT,
     input wire [4:0] MEM_RD,
+
     output wire WB_WRITE_ENABLE,
     output wire [31:0] WB_WRITE_DATA,
-    output wire [4:0] WB_RD,
+    output wire [4:0] WB_RD
 );
 
     wire [31:0] PROCESSED_DATA_OUT;
