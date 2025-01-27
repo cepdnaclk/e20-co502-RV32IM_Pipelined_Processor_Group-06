@@ -5,10 +5,10 @@ module ID_EX (
     input wire [31:0] ID_READ_DATA1,
     input wire [31:0] ID_READ_DATA2,
     input wire [31:0] ID_IMMEDIATE,
-    input wire [4:0] ID_WRITE_ADDR,
+    input wire [4:0] ID_RD,
     input wire [2:0] ID_FUNC3,
     input wire [31:0] ID_PC_PLUS4,
-    input wire [2:0] ID_ALU_CONTROL,
+    input wire [3:0] ID_ALU_CONTROL,
     input wire ID_WRITE_ENABLE,
     input wire ID_DATA_MEM_SELECT,
     input wire ID_MEM_WRITE,
@@ -22,10 +22,10 @@ module ID_EX (
     output reg [31:0] EX_READ_DATA1,
     output reg [31:0] EX_READ_DATA2,
     output reg [31:0] EX_IMMEDIATE,
-    output reg [4:0] EX_WRITE_ADDR,
+    output reg [4:0] EX_RD,
     output reg [2:0] EX_FUNC3,
     output reg [31:0] EX_PC_PLUS4,
-    output reg [2:0] EX_ALU_CONTROL,
+    output reg [3:0] EX_ALU_CONTROL,
     output reg EX_WRITE_ENABLE,
     output reg EX_DATA_MEM_SELECT,
     output reg EX_MEM_WRITE,
@@ -43,7 +43,7 @@ module ID_EX (
             EX_READ_DATA1 <= 32'b0;
             EX_READ_DATA2 <= 32'b0;
             EX_IMMEDIATE <= 32'b0;
-            EX_WRITE_ADDR <= 5'b0;
+            EX_RD <= 5'b0;
             EX_FUNC3 <= 3'b0;
             EX_PC_PLUS4 <= 32'b0;
             EX_ALU_CONTROL <= 3'b0;
@@ -61,7 +61,7 @@ module ID_EX (
             EX_READ_DATA1 <= ID_READ_DATA1;
             EX_READ_DATA2 <= ID_READ_DATA2;
             EX_IMMEDIATE <= ID_IMMEDIATE;
-            EX_WRITE_ADDR <= ID_WRITE_ADDR;
+            EX_RD <= ID_RD;
             EX_FUNC3 <= ID_FUNC3;
             EX_PC_PLUS4 <= ID_PC_PLUS4;
             EX_ALU_CONTROL <= ID_ALU_CONTROL;

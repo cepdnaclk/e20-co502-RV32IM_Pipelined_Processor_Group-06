@@ -1,12 +1,12 @@
-module ALUControl(
+module ALU_CONTROL(
     input [6:0] FUNC7,
     input [2:0] FUNC3,
-    input [2:0] ALUOP,
+    input [2:0] ALU_OP,
     output reg [3:0] ALU_CTRL
 );
 
     always @(*) begin
-        case (ALUOP)
+        case (ALU_OP)
             3'b000: // R-type instructions (opcode: 0110011)
                 case ({FUNC3, FUNC7})
                     10'b000_0000000: ALU_CTRL = 4'b0010; // ADD
@@ -51,7 +51,7 @@ module ALUControl(
                     default: ALU_CTRL = 4'b1111; // Invalid case
                 endcase
 
-            default: ALU_CTRL = 4'b1111; // Invalid ALUOP
+            default: ALU_CTRL = 4'b1111; // Invalid ALU_OP
         endcase
     end
 

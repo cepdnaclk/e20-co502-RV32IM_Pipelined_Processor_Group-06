@@ -5,9 +5,9 @@ module InstructionMemoryTestBench;
     wire [31:0] instruction; // Instruction output
 
     // Instantiate the Instruction Memory module
-    InstructionMemory uut (
-        .pcAddress(pcAddress),
-        .instruction(instruction)
+    INSTRUCTION_MEMORY uut (
+        .ADDRESS(pcAddress),
+        .INSTRUCTION(instruction)
     );
 
     // Test sequence

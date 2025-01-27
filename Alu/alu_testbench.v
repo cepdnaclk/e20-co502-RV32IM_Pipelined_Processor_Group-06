@@ -13,7 +13,7 @@ module alu_tb;
     wire [31:0] RESULT;
 
     // Instantiate the ALU
-    alu uut (
+    ALU uut (
         .DATA1(DATA1),
         .DATA2(DATA2),
         .ALU_OPERATION(ALU_OPERATION),

@@ -18,7 +18,7 @@ module IDTestBench;
     wire [31:0] ID_IMMEDIATE;
     wire [4:0] ID_RD;
     wire [2:0] ID_FUNC3;
-    wire [2:0] ID_ALU_CONTROL;
+    wire [3:0] ID_ALU_CONTROL;
     wire ID_WRITE_ENABLE;
     wire ID_DATA_MEM_SELECT;
     wire ID_MEM_WRITE;

@@ -1,8 +1,8 @@
 // 32 bit integer ALU
-module alu(DATA1,DATA2,ALU_OPERATION,RESULT);
+module ALU(DATA1,DATA2,ALU_OPERATION,RESULT);
 
     input [31:0] DATA1,DATA2;
-    input [5:0] ALU_OPERATION;
+    input [3:0] ALU_OPERATION;
     output reg [31:0] RESULT;
 
     wire [31:0] subOut,addOut,andOut,orOut,left_shift_out,set_less_than_out,
@@ -23,16 +23,16 @@ module alu(DATA1,DATA2,ALU_OPERATION,RESULT);
     begin
         case(ALU_OPERATION)
 
-        5'b00000  :RESULT=andOut;
-        5'b00001  :RESULT=orOut;
-        5'b00010  :RESULT=addOut;
-        5'b00011  :RESULT=subOut;
-        5'b00100  :RESULT=left_shift_out;
-        5'b00101  :RESULT=set_less_than_out; // SLT => Set Less Than(1/0)
-        5'b00110  :RESULT=set_less_than_unsigned_out; // SLT unsigned
-        5'b00111  :RESULT=xor_out;
-        5'b01000  :RESULT=logical_shift_right_out;
-        5'b01001  :RESULT=arithmetic_shift_right_out;
+        5'b0000  :RESULT=andOut;
+        5'b0001  :RESULT=orOut;
+        5'b0010  :RESULT=addOut;
+        5'b0011  :RESULT=subOut;
+        5'b0100  :RESULT=left_shift_out;
+        5'b0101  :RESULT=set_less_than_out; // SLT => Set Less Than(1/0)
+        5'b0110  :RESULT=set_less_than_unsigned_out; // SLT unsigned
+        5'b0111  :RESULT=xor_out;
+        5'b1000  :RESULT=logical_shift_right_out;
+        5'b1001  :RESULT=arithmetic_shift_right_out;
 
 
         endcase

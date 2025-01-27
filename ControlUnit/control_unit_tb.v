@@ -16,11 +16,10 @@ module control_unit_tb;
     wire IMM_SELECT;
     wire JAL_SELECT;
     wire DATA_MEM_SELECT;
-    wire [1:0] WB_METHOD;
     wire [2:0] IMM_PICK;
 
     // Instantiate the Unit Under Test (UUT)
-    control_unit uut (
+    CONTROL_UNIT uut (
         .OPCODE(OPCODE), 
         .FUNC3(FUNC3), 
         .FUNC7(FUNC7), 
@@ -33,7 +32,6 @@ module control_unit_tb;
         .IMM_SELECT(IMM_SELECT), 
         .JAL_SELECT(JAL_SELECT), 
         .DATA_MEM_SELECT(DATA_MEM_SELECT), 
-        .WB_METHOD(WB_METHOD), 
         .IMM_PICK(IMM_PICK)
     );
 

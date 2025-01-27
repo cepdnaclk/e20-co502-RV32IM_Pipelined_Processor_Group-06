@@ -8,7 +8,7 @@ module EX (
     input wire [31:0] ID_IMMEDIATE,
     input wire [4:0] ID_RD,
     input wire [2:0] ID_FUNC3,
-    input wire [2:0] ID_ALU_CONTROL,
+    input wire [3:0] ID_ALU_CONTROL,
     input wire ID_WRITE_ENABLE,
     input wire ID_DATA_MEM_SELECT,
     input wire ID_MEM_WRITE,
@@ -23,11 +23,11 @@ module EX (
     output wire EX_DATA_MEM_SELECT,
     output wire EX_MEM_WRITE,
     output wire EX_MEM_READ,
-    output wire EX_JAL_SELECTED,
+    output wire [31:0] EX_JAL_SELECTED,
     output wire [31:0] EX_READ_DATA2,
     output wire [4:0] EX_RD,
     output wire [31:0] EX_PC_TARGET, // directly to PC
-    output wire [31:0] EX_BRANCH_SELECT // direcly to PC
+    output wire EX_BRANCH_SELECT  // direcly to PC
 );
     // Internal signals
     wire [31:0] PC_SELECTED, IMM_SELECTED, ALU_RESULT;

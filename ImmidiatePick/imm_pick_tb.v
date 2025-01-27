@@ -6,13 +6,13 @@ module imm_pick_tb;
     reg [2:0] IMM_PICK;
 
     // Outputs
-    wire [31:0] IMMIDIATE;
+    wire [31:0] IMMEDIATE;
 
     // Instantiate the Unit Under Test (UUT)
     IMM_PICK uut (
         .INSTRUCTION(INSTRUCTION), 
         .IMM_PICK(IMM_PICK), 
-        .IMMIDIATE(IMMIDIATE)
+        .IMMEDIATE(IMMEDIATE)
     );
 
     initial begin
@@ -27,47 +27,47 @@ module imm_pick_tb;
         // Wait 100 ns for global reset to finish
         #10;
 
-        // Test I-type IMMIDIATE 1
+        // Test I-type IMMEDIATE 1
         INSTRUCTION = 32'b11111111111100000000000000000000; // (result - 11111111111111111111111111111111)
         IMM_PICK = 3'b000;
         #10;
 
-        // Test I-type IMMIDIATE 2
+        // Test I-type IMMEDIATE 2
         INSTRUCTION = 32'b00000000000011111111111111111111; // (result - 00000000000000000000000000000000)
         IMM_PICK = 3'b000;
         #10;
 
-        // Test S-type IMMIDIATE 1
+        // Test S-type IMMEDIATE 1
         INSTRUCTION = 32'b11111110000000000000111110000000; // (result - 11111111111111111111111111111111)
         IMM_PICK = 3'b001;
         #10;
 
-        // Test S-type IMMIDIATE 2
+        // Test S-type IMMEDIATE 2
         INSTRUCTION = 32'b00000001111111111111000001111111; // (result - 00000000000000000000000000000000)
         IMM_PICK = 3'b001;
         #10;
 
-        // Test U-type IMMIDIATE 1
+        // Test U-type IMMEDIATE 1
         INSTRUCTION = 32'b11111111111111111111000000000000; // (result - 11111111111111111111000000000000)
         IMM_PICK = 3'b010;
         #10;
 
-        // Test U-type IMMIDIATE 2
+        // Test U-type IMMEDIATE 2
         INSTRUCTION = 32'b00000000000000000000111111111111; // (result - 00000000000000000000000000000000)
         IMM_PICK = 3'b010;
         #10;
 
-        // Test B-type IMMIDIATE
+        // Test B-type IMMEDIATE
         INSTRUCTION = 32'b11111110000000000000111110000000; // (result - 11111111111111111111111111111110)
         IMM_PICK = 3'b011;
         #10;
 
-        // Test B-type IMMIDIATE
+        // Test B-type IMMEDIATE
         INSTRUCTION = 32'b00000001111111111111000001111111; // (result - 00000000000000000000000000000000)
         IMM_PICK = 3'b011;
         #10;
 
-        // Test J-type IMMIDIATE
+        // Test J-type IMMEDIATE
         INSTRUCTION = 32'h87654321; // Example INSTRUCTION
         IMM_PICK = 3'b100;
         #10;
