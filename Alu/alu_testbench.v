@@ -7,7 +7,7 @@ module alu_tb;
     // Inputs
     reg [31:0] DATA1;
     reg [31:0] DATA2;
-    reg [5:0] ALU_OPERATION;
+    reg [4:0] ALU_OPERATION;
 
     // Outputs
     wire [31:0] RESULT;

@@ -21,7 +21,7 @@ module REGISTER_FILE (
     assign READ_DATA2 = (READ_REG2 != 0) ? REGISTERS[READ_REG2] : 32'b0;
 
     // Write logic
-    always @(posedge CLK or posedge RST) begin
+    always @(posedge CLK or posedge RST) begin // change to work only in clk posd edge
         if (RST) begin
             // Reset all registers to 0
             for (i = 0; i < 32; i = i + 1) begin

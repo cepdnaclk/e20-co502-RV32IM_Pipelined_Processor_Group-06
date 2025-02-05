@@ -14,7 +14,7 @@ module ID (
     output wire [31:0] ID_IMMEDIATE,
     output wire [4:0] ID_RD,
     output wire [2:0] ID_FUNC3,
-    output wire [3:0] ID_ALU_CONTROL,
+    output wire [4:0] ID_ALU_CONTROL,
     output wire ID_WRITE_ENABLE,
     output wire ID_DATA_MEM_SELECT,
     output wire ID_MEM_WRITE,

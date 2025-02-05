@@ -11,14 +11,14 @@ module CPU (
     wire [31:0] ID_PC_out, ID_PC_PLUS4_out, ID_READ_DATA1_out, ID_READ_DATA2_out, ID_IMMEDIATE_out;
     wire [4:0] ID_RD_out;
     wire [2:0] ID_FUNC3_out;
-    wire [3:0] ID_ALU_CONTROL_out;
+    wire [4:0] ID_ALU_CONTROL_out;
     wire ID_WRITE_ENABLE_out, ID_DATA_MEM_SELECT_out, ID_MEM_WRITE_out, ID_MEM_READ_out, ID_JAL_SELECT_out, ID_IMM_SELECT_out, ID_PC_SELECT_out, ID_BRANCH_out, ID_JUMP_out;
 
     // EX stage wires
     wire [31:0] ID_PC_in, ID_PC_PLUS4_in, ID_READ_DATA1_in, ID_READ_DATA2_in, ID_IMMEDIATE_in;
     wire [4:0] ID_RD_in;
     wire [2:0] ID_FUNC3_in;
-    wire [3:0] ID_ALU_CONTROL_in;
+    wire [4:0] ID_ALU_CONTROL_in;
     wire ID_WRITE_ENABLE_in, ID_DATA_MEM_SELECT_in, ID_MEM_WRITE_in, ID_MEM_READ_in, ID_JAL_SELECT_in, ID_IMM_SELECT_in, ID_PC_SELECT_in, ID_BRANCH_in, ID_JUMP_in;
     wire [2:0] EX_FUNC3_out;
     wire EX_WRITE_ENABLE_out, EX_DATA_MEM_SELECT_out, EX_MEM_WRITE_out, EX_MEM_READ_out;

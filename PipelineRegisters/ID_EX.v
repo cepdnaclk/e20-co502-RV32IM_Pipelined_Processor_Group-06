@@ -8,7 +8,7 @@ module ID_EX (
     input wire [4:0] ID_RD,
     input wire [2:0] ID_FUNC3,
     input wire [31:0] ID_PC_PLUS4,
-    input wire [3:0] ID_ALU_CONTROL,
+    input wire [4:0] ID_ALU_CONTROL,
     input wire ID_WRITE_ENABLE,
     input wire ID_DATA_MEM_SELECT,
     input wire ID_MEM_WRITE,
@@ -25,7 +25,7 @@ module ID_EX (
     output reg [4:0] EX_RD,
     output reg [2:0] EX_FUNC3,
     output reg [31:0] EX_PC_PLUS4,
-    output reg [3:0] EX_ALU_CONTROL,
+    output reg [4:0] EX_ALU_CONTROL,
     output reg EX_WRITE_ENABLE,
     output reg EX_DATA_MEM_SELECT,
     output reg EX_MEM_WRITE,
@@ -46,7 +46,7 @@ module ID_EX (
             EX_RD <= 5'b0;
             EX_FUNC3 <= 3'b0;
             EX_PC_PLUS4 <= 32'b0;
-            EX_ALU_CONTROL <= 3'b0;
+            EX_ALU_CONTROL <= 4'b0;
             EX_WRITE_ENABLE <= 1'b0;
             EX_DATA_MEM_SELECT <= 1'b0;
             EX_MEM_WRITE <= 1'b0;

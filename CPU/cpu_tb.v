@@ -22,7 +22,7 @@ module cpu_tb;
 
         // Add stimulus here
         // Test case 1: Normal operation
-        #100;
+        #350;
 
         // Test case 2: Reset during operation
         RST = 1;
@@ -40,10 +40,16 @@ module cpu_tb;
     // Clock generation
     always #5 CLK = ~CLK;
 
+
+    integer i;
     // Dump waveform
     initial begin
         $dumpfile("cpu_tb.vcd");
         $dumpvars(0, cpu_tb);
+
+        // Adding the register file inside REGISTERS to the GTKwave
+        for (i=0; i<32; i=i+1)
+            $dumpvars(1,cpu_tb.uut.id_stage.register_file.REGISTERS[i]);
     end
 
 endmodule

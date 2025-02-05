@@ -1,0 +1,182 @@
+[*]
+[*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
+[*] Wed Feb 05 08:35:07 2025
+[*]
+[dumpfile] "E:\My Projects\Verilog\RISC-V_Pipellined_Archiecture\CPU\GTKWave\cpu_tb.vcd"
+[savefile] "E:\My Projects\Verilog\RISC-V_Pipellined_Archiecture\CPU\GTKWave\fullCPU.gtkw"
+[timestart] 0
+[size] 1536 793
+[pos] -165 -165
+*-17.028059 187700 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] cpu_tb.
+[treeopen] cpu_tb.uut.
+[treeopen] cpu_tb.uut.id_stage.
+[sst_width] 197
+[signals_width] 458
+[sst_expanded] 1
+[sst_vpaned_height] 467
+@28
+cpu_tb.uut.if_stage.CLK
+@200
+-
+-IF
+@22
+cpu_tb.uut.if_stage.PC_INST.PC[31:0]
+@420
+cpu_tb.uut.if_stage.instruction_memory.ADDRESS[31:0]
+@28
+cpu_tb.uut.if_stage.instruction_memory.INSTRUCTION[31:0]
+@200
+-
+-IF_ID
+@28
+cpu_tb.uut.if_id.IF_INSTRUCTION[31:0]
+cpu_tb.uut.if_id.ID_INSTRUCTION[31:0]
+@24
+cpu_tb.uut.if_id.IF_PC[31:0]
+cpu_tb.uut.if_id.ID_PC[31:0]
+cpu_tb.uut.if_id.IF_PC_PLUS4[31:0]
+@c00024
+cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+@28
+(0)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(1)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(2)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(3)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(4)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(5)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(6)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(7)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(8)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(9)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(10)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(11)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(12)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(13)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(14)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(15)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(16)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(17)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(18)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(19)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(20)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(21)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(22)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(23)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(24)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(25)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(26)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(27)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(28)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(29)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(30)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+(31)cpu_tb.uut.if_id.ID_PC_PLUS4[31:0]
+@1401200
+-group_end
+@200
+-
+-ID
+@24
+cpu_tb.uut.id_stage.ID_PC_PLUS4[31:0]
+@25
+cpu_tb.uut.id_stage.ID_PC[31:0]
+@28
+cpu_tb.uut.id_stage.WB_RD[4:0]
+cpu_tb.uut.id_stage.WB_WRITE_DATA[31:0]
+cpu_tb.uut.id_stage.WB_WRITE_ENABLE
+@200
+-ALU_CTRL
+@28
+cpu_tb.uut.id_stage.alu_control.FUNC3[2:0]
+cpu_tb.uut.id_stage.alu_control.FUNC7[6:0]
+cpu_tb.uut.id_stage.alu_control.ALU_OP[2:0]
+@200
+-REG_FILE
+@28
+cpu_tb.uut.id_stage.register_file.READ_REG1[4:0]
+cpu_tb.uut.id_stage.register_file.READ_REG2[4:0]
+cpu_tb.uut.id_stage.register_file.WRITE_REG[4:0]
+cpu_tb.uut.id_stage.register_file.WRITE_ENABLE
+cpu_tb.uut.id_stage.register_file.WRITE_DATA[31:0]
+cpu_tb.uut.id_stage.register_file.READ_DATA1[31:0]
+cpu_tb.uut.id_stage.register_file.READ_DATA2[31:0]
+@22
+cpu_tb.uut.id_stage.register_file.\REGISTERS[0][31:0]
+cpu_tb.uut.id_stage.register_file.\REGISTERS[1][31:0]
+cpu_tb.uut.id_stage.register_file.\REGISTERS[2][31:0]
+cpu_tb.uut.id_stage.register_file.\REGISTERS[3][31:0]
+cpu_tb.uut.id_stage.register_file.\REGISTERS[4][31:0]
+cpu_tb.uut.id_stage.register_file.\REGISTERS[5][31:0]
+cpu_tb.uut.id_stage.register_file.\REGISTERS[6][31:0]
+cpu_tb.uut.id_stage.register_file.\REGISTERS[7][31:0]
+cpu_tb.uut.id_stage.register_file.\REGISTERS[8][31:0]
+cpu_tb.uut.id_stage.register_file.\REGISTERS[9][31:0]
+cpu_tb.uut.id_stage.register_file.\REGISTERS[10][31:0]
+@200
+-CONTROL_UNIT
+@28
+cpu_tb.uut.id_stage.control_unit.ALU_OP[2:0]
+cpu_tb.uut.id_stage.control_unit.WRITE_EN
+cpu_tb.uut.id_stage.control_unit.DATA_MEM_SELECT
+cpu_tb.uut.id_stage.control_unit.MEM_WRITE
+cpu_tb.uut.id_stage.control_unit.MEM_READ
+cpu_tb.uut.id_stage.control_unit.JAL_SELECT
+cpu_tb.uut.id_stage.control_unit.IMM_SELECT
+cpu_tb.uut.id_stage.control_unit.PC_SELECT
+cpu_tb.uut.id_stage.control_unit.BRANCH
+cpu_tb.uut.id_stage.control_unit.JUMP
+cpu_tb.uut.id_stage.control_unit.IMM_PICK[2:0]
+@200
+-IMM_PICK
+@28
+cpu_tb.uut.id_stage.imm_pick.IMM_PICK[2:0]
+cpu_tb.uut.id_stage.imm_pick.IMMEDIATE[31:0]
+cpu_tb.uut.id_stage.imm_pick.INSTRUCTION[31:0]
+@200
+-
+-ID_EX
+@22
+cpu_tb.uut.id_ex.ID_ALU_CONTROL[4:0]
+cpu_tb.uut.id_ex.EX_ALU_CONTROL[4:0]
+@28
+cpu_tb.uut.id_ex.ID_BRANCH
+cpu_tb.uut.id_ex.EX_BRANCH
+cpu_tb.uut.id_ex.ID_DATA_MEM_SELECT
+cpu_tb.uut.id_ex.EX_DATA_MEM_SELECT
+cpu_tb.uut.id_ex.ID_FUNC3[2:0]
+@22
+cpu_tb.uut.id_ex.EX_IMMEDIATE[31:0]
+@28
+cpu_tb.uut.id_ex.ID_IMM_SELECT
+cpu_tb.uut.id_ex.EX_IMM_SELECT
+cpu_tb.uut.id_ex.ID_JAL_SELECT
+cpu_tb.uut.id_ex.EX_JAL_SELECT
+cpu_tb.uut.id_ex.ID_JUMP
+cpu_tb.uut.id_ex.EX_JUMP
+cpu_tb.uut.id_ex.ID_MEM_READ
+cpu_tb.uut.id_ex.EX_MEM_READ
+cpu_tb.uut.id_ex.ID_MEM_WRITE
+cpu_tb.uut.id_ex.EX_MEM_WRITE
+@22
+cpu_tb.uut.id_ex.ID_PC[31:0]
+cpu_tb.uut.id_ex.EX_PC[31:0]
+cpu_tb.uut.id_ex.ID_PC_PLUS4[31:0]
+cpu_tb.uut.id_ex.EX_PC_PLUS4[31:0]
+@28
+cpu_tb.uut.id_ex.ID_PC_SELECT
+cpu_tb.uut.id_ex.EX_PC_SELECT
+@22
+cpu_tb.uut.id_ex.ID_RD[4:0]
+cpu_tb.uut.id_ex.EX_RD[4:0]
+cpu_tb.uut.id_ex.ID_READ_DATA1[31:0]
+cpu_tb.uut.id_ex.EX_READ_DATA1[31:0]
+cpu_tb.uut.id_ex.ID_READ_DATA2[31:0]
+cpu_tb.uut.id_ex.EX_READ_DATA2[31:0]
+@28
+cpu_tb.uut.id_ex.ID_WRITE_ENABLE
+cpu_tb.uut.id_ex.EX_WRITE_ENABLE
+@200
+-
+-EX
+[pattern_trace] 1
+[pattern_trace] 0
