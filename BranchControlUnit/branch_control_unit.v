@@ -6,19 +6,23 @@ module BRANCH_CONTROL_UNIT(
     input wire [31:0] OUT2,
     input wire [31:0] ALU_RESULT,
     output reg [31:0] TARGET_ADDRESS,
-    output reg BRANCH_SELECT
+    output reg BRANCH_SELECT,
+    output reg RESET
 );
 
     always @(*) begin
         // Default values
         TARGET_ADDRESS = 32'b0;
         BRANCH_SELECT = 1'b0;
+        RESET = 1'b0;
 
         if (JUMP) begin
             // For jump instructions, the target address is the ALU result
             TARGET_ADDRESS = ALU_RESULT;
             BRANCH_SELECT = 1'b1;
+            RESET = 1'b1; // Reset prevous two stages
         end else if (BRANCH) begin
+            RESET = 1'b1; // Reset prevous two stages
             // For branch instructions, determine if the branch should be taken
             case (FUNC3)
                 3'b000: begin // BEQ
@@ -60,6 +64,7 @@ module BRANCH_CONTROL_UNIT(
                 default: begin
                     TARGET_ADDRESS = 32'b0;
                     BRANCH_SELECT = 1'b0;
+                    RESET = 1'b0;
                 end
             endcase
         end
