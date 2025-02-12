@@ -19,6 +19,14 @@ module ALU_CONTROL(
                     10'b100_0000000: ALU_CTRL = 5'b00111; // XOR
                     10'b101_0000000: ALU_CTRL = 5'b01000; // SRL
                     10'b101_0100000: ALU_CTRL = 5'b01001; // SRA
+                    10'b000_0000001: ALU_CTRL = 5'b01010; // MUL
+                    10'b001_0000001: ALU_CTRL = 5'b01011; // MULH
+                    10'b010_0000001: ALU_CTRL = 5'b01100; // MULHSU
+                    10'b011_0000001: ALU_CTRL = 5'b01101; // MULHU
+                    10'b100_0000001: ALU_CTRL = 5'b01110; // DIV
+                    10'b101_0000001: ALU_CTRL = 5'b01111; // DIVU
+                    10'b110_0000001: ALU_CTRL = 5'b10000; // REM
+                    10'b111_0000001: ALU_CTRL = 5'b10001; // REMU
                     default: ALU_CTRL = 5'b11111; // Invalid case
                 endcase
 
@@ -50,7 +58,17 @@ module ALU_CONTROL(
                             ALU_CTRL = 5'b11111; // Invalid
                     default: ALU_CTRL = 5'b11111; // Invalid case
                 endcase
+            
+            3'b100: // S-type instructions (opcode => 0100011) and B-type and J-Type instructions (opcode => 1100011)
+                ALU_CTRL = 5'b00010; // ADD for calculating the target address
 
+            3'b101: // for LUI instruction
+                ALU_CTRL = 5'b10010; // forward => for the LUI instruction
+
+            3'b110: // for AUIPC instruction
+                ALU_CTRL = 5'b00010; // adding PC and ths IMMEDIATE => for the AUIPC instruction
+
+            
             default: ALU_CTRL = 5'b11111; // Invalid ALU_OP
         endcase
     end
