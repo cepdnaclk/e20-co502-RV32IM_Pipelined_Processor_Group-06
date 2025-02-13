@@ -22,7 +22,7 @@ module cpu_tb;
 
         // Add stimulus here
         // Test case 1: Normal operation
-        #600;
+        #800;
 
         // Test case 2: Reset during operation
         RST = 1;
