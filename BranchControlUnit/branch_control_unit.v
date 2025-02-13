@@ -19,6 +19,7 @@ module BRANCH_CONTROL_UNIT(
         if (JUMP) begin
             // For jump instructions, the target address is the ALU result
             TARGET_ADDRESS = ALU_RESULT;
+            TARGET_ADDRESS[0] = 2'b0; // Align to 32-bit address
             BRANCH_SELECT = 1'b1;
             RESET = 1'b1; // Reset prevous two stages
         end else if (BRANCH) begin

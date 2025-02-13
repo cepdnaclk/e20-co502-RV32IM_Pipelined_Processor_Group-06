@@ -5,7 +5,7 @@ module CONTROL_UNIT(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
     output reg WRITE_EN, MEM_WRITE, MEM_READ, BRANCH, JUMP, PC_SELECT, IMM_SELECT, JAL_SELECT, DATA_MEM_SELECT;
     output reg [2:0] IMM_PICK, ALU_OP;
 
-    // always block * to run the block whenever any input changes  
+    // always block * to run the block whenever any input changes
     always @(*)
     begin
         // Default values
@@ -24,13 +24,13 @@ module CONTROL_UNIT(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
         case (OPCODE)
 
         //////////////////////////////////////////////////// R-type //////////////////////////////////////////////////////////////////
-        8'b0110011: 
+        8'b0110011:
             begin
                 WRITE_EN = 1'b1;
             end
 
         //////////////////////////////////////////////////// I-type //////////////////////////////////////////////////////////////////
-        8'b0000011: 
+        8'b0000011:
             if (FUNC3 == 3'b000 || // LB
                 FUNC3 == 3'b001 || // LH
                 FUNC3 == 3'b010 || // LW
@@ -43,7 +43,7 @@ module CONTROL_UNIT(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
                     ALU_OP = 3'b001;
                     DATA_MEM_SELECT = 1'b1;
                 end
-        8'b1100111: 
+        8'b1100111:
             case (FUNC3)
             3'b000: // JALR
             begin
@@ -78,25 +78,28 @@ module CONTROL_UNIT(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
             end
 
         //////////////////////////////////////////////////// S-type //////////////////////////////////////////////////////////////////
-        8'b0100011: 
+        8'b0100011:
             case (FUNC3)
             3'b000: // SB
             begin
                 MEM_WRITE = 1'b1;
                 IMM_SELECT = 1'b1;
                 IMM_PICK = 3'b001;
+                ALU_OP = 3'b100;
             end
             3'b001: // SH
             begin
                 MEM_WRITE = 1'b1;
                 IMM_SELECT = 1'b1;
                 IMM_PICK = 3'b001;
+                ALU_OP = 3'b100;
             end
             3'b010: // SW
             begin
                 MEM_WRITE = 1'b1;
                 IMM_SELECT = 1'b1;
                 IMM_PICK = 3'b001;
+                ALU_OP = 3'b100;
             end
             endcase
 
@@ -106,6 +109,7 @@ module CONTROL_UNIT(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
             WRITE_EN = 1'b1;
             IMM_PICK = 3'b010;
             IMM_SELECT = 1'b1;
+            ALU_OP     = 3'b101;
             end
         8'b0010111: // AUIPC
             begin
@@ -113,10 +117,11 @@ module CONTROL_UNIT(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
             IMM_PICK = 3'b010;
             IMM_SELECT = 1'b1;
             PC_SELECT = 1'b1;
+            ALU_OP = 3'b100;
             end
 
         //////////////////////////////////////////////////// B-type //////////////////////////////////////////////////////////////////
-        8'b1100011: 
+        8'b1100011:
             if (FUNC3 == 3'b000 || // BEQ
                 FUNC3 == 3'b001 || // BNE
                 FUNC3 == 3'b100 || // BLT
@@ -128,6 +133,7 @@ module CONTROL_UNIT(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
                 PC_SELECT = 1'b1;
                 IMM_SELECT = 1'b1;
                 IMM_PICK = 3'b011;
+                ALU_OP = 3'b100;
             end
 
 
@@ -140,10 +146,11 @@ module CONTROL_UNIT(OPCODE, FUNC3, FUNC7, WRITE_EN, MEM_WRITE, MEM_READ, BRANCH,
             IMM_SELECT = 1'b1;
             IMM_PICK = 3'b100;
             WRITE_EN = 1'b1;
+            ALU_OP = 3'b100;
             end
         endcase
 
-    end 
+    end
 
 endmodule
 

@@ -6,7 +6,8 @@ module ALU(DATA1,DATA2,ALU_OPERATION,RESULT);
     output reg [31:0] RESULT;
 
     wire [31:0] subOut,addOut,andOut,orOut,left_shift_out,set_less_than_out,
-    set_less_than_unsigned_out,xor_out,logical_shift_right_out,arithmetic_shift_right_out;
+    set_less_than_unsigned_out,xor_out,logical_shift_right_out,arithmetic_shift_right_out,multiplied_output,
+    mulh_out, mulhsu_out, mulhu_out, div_out, divu_out, rem_out, remu_out, forward_out;
 
     and_1 and_1(DATA1,DATA2,andOut);
     sub_1 sub_1(DATA1,DATA2,subOut);
@@ -18,6 +19,15 @@ module ALU(DATA1,DATA2,ALU_OPERATION,RESULT);
     xor_module xor_1(DATA1,DATA2,xor_out);
     shift_right_logical shift_right_logical(DATA1,DATA2,logical_shift_right_out);
     shift_right_arithmetic shift_right_arithmetic(DATA1,DATA2,arithmetic_shift_right_out);
+    multiplication multiplication(DATA1,DATA2,multiplied_output);
+    mulh mulh(DATA1,DATA2,mulh_out);
+    mulhsu mulhsu(DATA1,DATA2,mulhsu_out);
+    mulhu mulhu(DATA1,DATA2,mulhu_out);
+    div div(DATA1,DATA2,div_out);
+    divu divu(DATA1,DATA2,divu_out);
+    rem rem(DATA1,DATA2,rem_out);
+    remu remu(DATA1,DATA2,remu_out);
+    forward_1_and_extender forward(DATA2, forward_out);
 
     always @(*)
     begin
@@ -33,11 +43,29 @@ module ALU(DATA1,DATA2,ALU_OPERATION,RESULT);
         5'b00111  :RESULT=xor_out;
         5'b01000  :RESULT=logical_shift_right_out;
         5'b01001  :RESULT=arithmetic_shift_right_out;
-
-
+        5'b01010  :RESULT=multiplied_output; // Multiplication
+        5'b01011  :RESULT=mulh_out; // MULH
+        5'b01100  :RESULT=mulhsu_out; // MULHSU
+        5'b01101  :RESULT=mulhu_out; // MULHU
+        5'b01110  :RESULT=div_out; // DIV
+        5'b01111  :RESULT=divu_out; // DIVU
+        5'b10000  :RESULT=rem_out; // REM
+        5'b10001  :RESULT=remu_out; // REMU
+        5'b10010  :RESULT=forward_out; // forward => for the LUI instruction
         endcase
-
     end
+endmodule
+
+
+module forward_1_and_extender(DATA2, forward_out);
+
+    input [31:0] DATA2;
+    output reg [31:0] forward_out;
+
+    always @(*) begin
+        #1 forward_out = {DATA2[31:12], 12'b0};
+    end
+
 endmodule
 
 module add_1(DATA1,DATA2,addOut);
@@ -91,7 +119,6 @@ module left_shift(DATA1, DATA2, left_shift_out);
 
 endmodule
 
-
 module set_less_than(DATA1, DATA2, set_less_than_out);
 
     input [31:0] DATA1, DATA2;
@@ -106,7 +133,6 @@ module set_less_than(DATA1, DATA2, set_less_than_out);
     end
 
 endmodule
-
 
 module set_less_than_unsigned(DATA1, DATA2, set_less_than_unsigned_out);
 
@@ -132,7 +158,6 @@ module xor_module(DATA1, DATA2, xor_out);
 
 endmodule
 
-
 module shift_right_logical(DATA1, DATA2, logical_shift_right_out);
 
     input [31:0] DATA1, DATA2;
@@ -142,12 +167,83 @@ module shift_right_logical(DATA1, DATA2, logical_shift_right_out);
 
 endmodule
 
-
 module shift_right_arithmetic(DATA1, DATA2, arithmetic_shift_right_out);
 
     input [31:0] DATA1, DATA2;
     output [31:0] arithmetic_shift_right_out;
 
     assign arithmetic_shift_right_out = $signed(DATA1) >>> DATA2;
+
+endmodule
+
+module multiplication(DATA1, DATA2, multiplied_output);
+
+    input [31:0] DATA1, DATA2;
+    output [31:0] multiplied_output;
+
+    assign multiplied_output = DATA1 * DATA2;
+
+endmodule
+
+module mulh(DATA1, DATA2, mulh_out);
+
+    input [31:0] DATA1, DATA2;
+    output [31:0] mulh_out;
+
+    assign mulh_out = ($signed(DATA1) * $signed(DATA2)) >> 32;
+
+endmodule
+
+module mulhsu(DATA1, DATA2, mulhsu_out);
+
+    input [31:0] DATA1, DATA2;
+    output [31:0] mulhsu_out;
+
+    assign mulhsu_out = ($signed(DATA1) * DATA2) >> 32;
+
+endmodule
+
+module mulhu(DATA1, DATA2, mulhu_out);
+
+    input [31:0] DATA1, DATA2;
+    output [31:0] mulhu_out;
+
+    assign mulhu_out = (DATA1 * DATA2) >> 32;
+
+endmodule
+
+module div(DATA1, DATA2, div_out);
+
+    input [31:0] DATA1, DATA2;
+    output [31:0] div_out;
+
+    assign div_out = $signed(DATA1) / $signed(DATA2);
+
+endmodule
+
+module divu(DATA1, DATA2, divu_out);
+
+    input [31:0] DATA1, DATA2;
+    output [31:0] divu_out;
+
+    assign divu_out = DATA1 / DATA2;
+
+endmodule
+
+module rem(DATA1, DATA2, rem_out);
+
+    input [31:0] DATA1, DATA2;
+    output [31:0] rem_out;
+
+    assign rem_out = $signed(DATA1) % $signed(DATA2);
+
+endmodule
+
+module remu(DATA1, DATA2, remu_out);
+
+    input [31:0] DATA1, DATA2;
+    output [31:0] remu_out;
+
+    assign remu_out = DATA1 % DATA2;
 
 endmodule
