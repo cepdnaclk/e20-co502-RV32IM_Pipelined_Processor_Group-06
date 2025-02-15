@@ -37,7 +37,7 @@ module ID_EX (
     output reg EX_JUMP
 );
 
-    always @(posedge CLK or posedge RST) begin
+    always @(posedge CLK) begin
         if (RST) begin
             EX_PC <= 32'b0;
             EX_READ_DATA1 <= 32'b0;
@@ -46,7 +46,7 @@ module ID_EX (
             EX_RD <= 5'b0;
             EX_FUNC3 <= 3'b0;
             EX_PC_PLUS4 <= 32'b0;
-            EX_ALU_CONTROL <= 4'b0;
+            EX_ALU_CONTROL <= 5'b0;
             EX_WRITE_ENABLE <= 1'b0;
             EX_DATA_MEM_SELECT <= 1'b0;
             EX_MEM_WRITE <= 1'b0;

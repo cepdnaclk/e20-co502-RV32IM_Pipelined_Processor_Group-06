@@ -27,7 +27,8 @@ module EX (
     output wire [31:0] EX_READ_DATA2,
     output wire [4:0] EX_RD,
     output wire [31:0] EX_PC_TARGET, // directly to PC
-    output wire EX_BRANCH_SELECT  // direcly to PC
+    output wire EX_BRANCH_SELECT,  // direcly to PC
+    output wire BRANCH_PIPLINE_RESET
 );
     // Internal signals
     wire [31:0] PC_SELECTED, IMM_SELECTED, ALU_RESULT;
@@ -73,7 +74,8 @@ module EX (
         .OUT2(ID_READ_DATA2),
         .ALU_RESULT(ALU_RESULT),
         .TARGET_ADDRESS(EX_PC_TARGET),
-        .BRANCH_SELECT(EX_BRANCH_SELECT)
+        .BRANCH_SELECT(EX_BRANCH_SELECT),
+        .RESET(BRANCH_PIPLINE_RESET)
     );
 
     // Output assignments

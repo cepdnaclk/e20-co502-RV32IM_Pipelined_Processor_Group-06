@@ -15,7 +15,7 @@ module MEM_WB (
     output reg [2:0] WB_FUNC3
 );
 
-    always @(posedge CLK or posedge RST) begin
+    always @(posedge CLK) begin
         if (RST) begin
             WB_JAL_SELECTED <= 32'b0;
             WB_DATA_OUT <= 32'b0;

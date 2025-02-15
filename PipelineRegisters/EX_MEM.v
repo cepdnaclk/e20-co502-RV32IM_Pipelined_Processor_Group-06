@@ -19,7 +19,7 @@ module EX_MEM (
     output reg MEM_DATA_MEM_SELECT
 );
 
-    always @(posedge CLK or posedge RST) begin
+    always @(posedge CLK) begin
         if (RST) begin
             MEM_JAL_SELECTED <= 32'b0;
             MEM_READ_DATA2 <= 32'b0;

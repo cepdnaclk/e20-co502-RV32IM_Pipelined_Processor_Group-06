@@ -27,6 +27,10 @@ module CPU (
     wire [4:0] EX_RD_out;
     wire [31:0] EX_PC_TARGET_out; // directly to PC
     wire EX_BRANCH_SELECT_out; // directly to PC
+    wire BRANCH_PIPLINE_RESET_out; // directly to OR gate to reset pipelines 
+
+    // BRANCH OR GATE
+    reg BRANCH_OR_HARD_RESET_out; // directly to OR gate to reset pipelines( IF_ID and ID_EX) (reg is used to store the value)
 
     // MEM stage wires
     wire [2:0] EX_FUNC3_in;
@@ -55,6 +59,17 @@ module CPU (
         .OUT(NEXT_PC_in)
     );
 
+    // OR GATE TO RESET PIPELINES
+    // If BRANCH_PIPLINE_RESET_out or RESET is 1; then reset two previous pipelines (IF_ID and ID_EX) mannually created the OR gate
+    always @(*) begin
+        if (BRANCH_PIPLINE_RESET_out || RST) begin
+            BRANCH_OR_HARD_RESET_out = 1'b1;
+            end 
+        else begin
+            BRANCH_OR_HARD_RESET_out = 1'b0;
+        end
+    end
+
     // IF stage
     IF if_stage (
         .CLK(CLK),
@@ -68,7 +83,7 @@ module CPU (
     // IF_ID pipeline register
     IF_ID if_id (
         .CLK(CLK),
-        .RST(RST),
+        .RST(BRANCH_OR_HARD_RESET_out),
         .IF_PC(IF_PC_out),
         .IF_INSTRUCTION(IF_INSTRUCTION_out),
         .IF_PC_PLUS4(IF_PC_PLUS4_out),
@@ -109,7 +124,7 @@ module CPU (
     // ID_EX pipeline register
     ID_EX id_ex (
         .CLK(CLK),
-        .RST(RST),
+        .RST(BRANCH_OR_HARD_RESET_out),
         .ID_PC(ID_PC_out),
         .ID_READ_DATA1(ID_READ_DATA1_out),
         .ID_READ_DATA2(ID_READ_DATA2_out),
@@ -176,7 +191,8 @@ module CPU (
         .EX_READ_DATA2(EX_READ_DATA2_out),
         .EX_RD(EX_RD_out),
         .EX_PC_TARGET(EX_PC_TARGET_out),
-        .EX_BRANCH_SELECT(EX_BRANCH_SELECT_out)
+        .EX_BRANCH_SELECT(EX_BRANCH_SELECT_out),
+        .BRANCH_PIPLINE_RESET(BRANCH_PIPLINE_RESET_out)
     );
 
     EX_MEM ex_mem (

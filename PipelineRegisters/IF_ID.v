@@ -9,7 +9,7 @@ module IF_ID (
     output reg [31:0] ID_PC_PLUS4
 );
 
-    always @(posedge CLK or posedge RST) begin
+    always @(posedge CLK) begin
         if (RST) begin
             ID_PC <= 32'b0;
             ID_INSTRUCTION <= 32'b0;
