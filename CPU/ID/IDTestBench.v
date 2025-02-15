@@ -94,4 +94,4 @@ module IDTestBench;
 endmodule
 
 
-// iverilog -o IDTestBench.vvp ID.v IDTestBench.v ../../ControlUnit/control_unit.v ../../Registers/RegisterFile.v IMMEDIATE_GENERATOR.v ALU_CONTROL.v ../../Programcounter/ProgramCounter.v ../../Memory/InstructionMemory.v
+// iverilog -o IDTestBench.vvp ID.v IDTestBench.v ../../ControlUnit/control_unit.v ../../Registers/RegisterFile.v ../../ImmidiatePick/imm_pick.v ../../Alu_ctrl/alu_ctrl.v ../../Programcounter/ProgramCounter.v ../../InstructionMemory/InstructionMemory.v ../../RDSelector/rd_selector.v

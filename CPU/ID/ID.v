@@ -75,10 +75,16 @@ module ID (
         .ALU_CTRL(ID_ALU_CONTROL)
     );
 
+    // Destination Register Selector (to identify the type when forwarding)
+    RD_SELECTOR rd_selector (
+        .WRITE_REGISTER(IF_INSTRUCTION[11:7]),
+        .OPCODE(IF_INSTRUCTION[6:0]),
+        .RD(ID_RD)
+    );
+
     // Direct connections
     assign ID_PC = IF_PC;
     assign ID_PC_PLUS4 = IF_PC_PLUS4;
-    assign ID_RD = IF_INSTRUCTION[11:7];
     assign ID_FUNC3 = IF_INSTRUCTION[14:12];
 
 endmodule
