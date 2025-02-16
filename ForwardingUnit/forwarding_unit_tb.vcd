@@ -1,0 +1,61 @@
+$date
+	Sun Feb 16 11:28:53 2025
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module FORWARDING_UNIT_TB $end
+$var wire 2 ! FORWARD_EN [1:0] $end
+$var reg 5 " ADDR1 [4:0] $end
+$var reg 5 # ADDR2 [4:0] $end
+$var reg 5 $ STAGE_RD [4:0] $end
+$scope module uut $end
+$var wire 5 % ADDR1 [4:0] $end
+$var wire 5 & ADDR2 [4:0] $end
+$var wire 5 ' STAGE_RD [4:0] $end
+$var reg 2 ( FORWARD_EN [1:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b0 (
+b0 '
+b0 &
+b0 %
+b0 $
+b0 #
+b0 "
+b0 !
+$end
+#10
+b10 #
+b10 &
+b1 "
+b1 %
+#20
+b11 !
+b11 (
+b1 $
+b1 '
+b1 #
+b1 &
+#30
+b1 !
+b1 (
+b10 #
+b10 &
+#40
+b10 !
+b10 (
+b1 #
+b1 &
+b10 "
+b10 %
+#50

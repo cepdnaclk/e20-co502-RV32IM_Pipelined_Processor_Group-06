@@ -2,7 +2,7 @@ module FORWARDING_UNIT (
     input wire [4:0] ADDR1,
     input wire [4:0] ADDR2,
     input wire [4:0] STAGE_RD,
-    output wire [1:0] FORWARD_EN,
+    output reg [1:0] FORWARD_EN
 );
 
 always @(*) begin
