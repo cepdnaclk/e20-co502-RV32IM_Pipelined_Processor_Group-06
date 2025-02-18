@@ -13,10 +13,13 @@ module CPU (
     wire [2:0] ID_FUNC3_out;
     wire [4:0] ID_ALU_CONTROL_out;
     wire ID_WRITE_ENABLE_out, ID_DATA_MEM_SELECT_out, ID_MEM_WRITE_out, ID_MEM_READ_out, ID_JAL_SELECT_out, ID_IMM_SELECT_out, ID_PC_SELECT_out, ID_BRANCH_out, ID_JUMP_out;
+    wire [1:0] ID_MEM_FORWARD_EN_out, ID_WB_FORWARD_EN_out;
 
     // EX stage wires
     wire [31:0] ID_PC_in, ID_PC_PLUS4_in, ID_READ_DATA1_in, ID_READ_DATA2_in, ID_IMMEDIATE_in;
     wire [4:0] ID_RD_in;
+    wire [1:0] ID_MEM_FORWARD_EN_in;
+    wire [1:0] ID_WB_FORWARD_EN_in;
     wire [2:0] ID_FUNC3_in;
     wire [4:0] ID_ALU_CONTROL_in;
     wire ID_WRITE_ENABLE_in, ID_DATA_MEM_SELECT_in, ID_MEM_WRITE_in, ID_MEM_READ_in, ID_JAL_SELECT_in, ID_IMM_SELECT_in, ID_PC_SELECT_in, ID_BRANCH_in, ID_JUMP_in;
@@ -102,6 +105,8 @@ module CPU (
         .WB_WRITE_DATA(WB_WRITE_DATA_out), /// directly from WB stage
         .WB_WRITE_ENABLE(WB_WRITE_ENABLE_out), /// directly from WB stage
         .WB_RD(WB_RD_out), /// directly from WB stage
+        .EX_RD(EX_RD_out), /// directly from EX stage
+        .MEM_RD(MEM_RD_out), /// directly from MEM stage
         .ID_PC(ID_PC_out), 
         .ID_PC_PLUS4(ID_PC_PLUS4_out),
         .ID_READ_DATA1(ID_READ_DATA1_out),
@@ -118,13 +123,17 @@ module CPU (
         .ID_IMM_SELECT(ID_IMM_SELECT_out),
         .ID_PC_SELECT(ID_PC_SELECT_out),
         .ID_BRANCH(ID_BRANCH_out),
-        .ID_JUMP(ID_JUMP_out)
+        .ID_JUMP(ID_JUMP_out),
+        .ID_MEM_FORWARD_EN(ID_MEM_FORWARD_EN_out),
+        .ID_WB_FORWARD_EN(ID_WB_FORWARD_EN_out)
     );
 
     // ID_EX pipeline register
     ID_EX id_ex (
         .CLK(CLK),
         .RST(BRANCH_OR_HARD_RESET_out),
+        .ID_MEM_FORWARD_EN(ID_MEM_FORWARD_EN_out),
+        .ID_WB_FORWARD_EN(ID_WB_FORWARD_EN_out),
         .ID_PC(ID_PC_out),
         .ID_READ_DATA1(ID_READ_DATA1_out),
         .ID_READ_DATA2(ID_READ_DATA2_out),
@@ -142,6 +151,8 @@ module CPU (
         .ID_PC_SELECT(ID_PC_SELECT_out),
         .ID_BRANCH(ID_BRANCH_out),
         .ID_JUMP(ID_JUMP_out),
+        .EX_MEM_FORWARD_EN(ID_MEM_FORWARD_EN_in),
+        .EX_WB_FORWARD_EN(ID_WB_FORWARD_EN_in),
         .EX_PC(ID_PC_in),
         .EX_READ_DATA1(ID_READ_DATA1_in),
         .EX_READ_DATA2(ID_READ_DATA2_in),
@@ -165,6 +176,10 @@ module CPU (
     EX ex_stage (
         .CLK(CLK),
         .RST(RST),
+        .ID_MEM_FORWARD_EN(ID_MEM_FORWARD_EN_in),
+        .ID_WB_FORWARD_EN(ID_WB_FORWARD_EN_in),
+        .WB_RD_DATA(WB_WRITE_DATA_out), // directly from WB
+        .MEM_RD_DATA(MEM_JAL_SELECTED_out), // directly from MEM
         .ID_PC(ID_PC_in),
         .ID_PC_PLUS4(ID_PC_PLUS4_in),
         .ID_READ_DATA1(ID_READ_DATA1_in),

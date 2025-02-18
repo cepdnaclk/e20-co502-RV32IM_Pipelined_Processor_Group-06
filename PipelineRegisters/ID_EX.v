@@ -1,6 +1,8 @@
 module ID_EX (
     input wire CLK,
     input wire RST,
+    input wire [1:0] ID_MEM_FORWARD_EN,
+    input wire [1:0] ID_WB_FORWARD_EN,
     input wire [31:0] ID_PC,
     input wire [31:0] ID_READ_DATA1,
     input wire [31:0] ID_READ_DATA2,
@@ -18,6 +20,8 @@ module ID_EX (
     input wire ID_PC_SELECT,
     input wire ID_BRANCH,
     input wire ID_JUMP,
+    output reg [1:0] EX_MEM_FORWARD_EN,
+    output reg [1:0] EX_WB_FORWARD_EN,
     output reg [31:0] EX_PC,
     output reg [31:0] EX_READ_DATA1,
     output reg [31:0] EX_READ_DATA2,
@@ -39,6 +43,8 @@ module ID_EX (
 
     always @(posedge CLK) begin
         if (RST) begin
+            EX_MEM_FORWARD_EN <= 2'b0;
+            EX_WB_FORWARD_EN <= 2'b0;
             EX_PC <= 32'b0;
             EX_READ_DATA1 <= 32'b0;
             EX_READ_DATA2 <= 32'b0;
@@ -57,6 +63,8 @@ module ID_EX (
             EX_BRANCH <= 1'b0;
             EX_JUMP <= 1'b0;
         end else begin
+            EX_MEM_FORWARD_EN <= ID_MEM_FORWARD_EN;
+            EX_WB_FORWARD_EN <= ID_WB_FORWARD_EN;
             EX_PC <= ID_PC;
             EX_READ_DATA1 <= ID_READ_DATA1;
             EX_READ_DATA2 <= ID_READ_DATA2;

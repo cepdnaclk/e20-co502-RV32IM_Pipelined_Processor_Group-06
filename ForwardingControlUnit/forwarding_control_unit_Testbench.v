@@ -1,5 +1,5 @@
 `timescale 1ns / 1ps
-`include "ForwardingControlUnit.v"
+`include "forwarding_control_unit.v"
 
 module FORWARDING_CONTROL_UNIT_tb;
 

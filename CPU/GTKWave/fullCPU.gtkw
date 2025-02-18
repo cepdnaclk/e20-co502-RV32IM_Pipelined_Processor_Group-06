@@ -1,21 +1,21 @@
 [*]
 [*] GTKWave Analyzer v3.3.100 (w)1999-2019 BSI
-[*] Sat Feb 15 10:02:17 2025
+[*] Mon Feb 17 07:31:11 2025
 [*]
 [dumpfile] "E:\My Projects\Verilog\RISC-V_Pipellined_Archiecture\CPU\GTKWave\cpu_tb.vcd"
 [savefile] "E:\My Projects\Verilog\RISC-V_Pipellined_Archiecture\CPU\GTKWave\fullCPU.gtkw"
-[timestart] 545500
+[timestart] 0
 [size] 1536 793
-[pos] -35 -35
-*-15.908767 615000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[pos] -87 -87
+*-15.908767 85000 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] cpu_tb.
 [treeopen] cpu_tb.uut.
 [treeopen] cpu_tb.uut.ex_stage.
 [treeopen] cpu_tb.uut.id_stage.
-[sst_width] 197
+[sst_width] 289
 [signals_width] 458
 [sst_expanded] 1
-[sst_vpaned_height] 264
+[sst_vpaned_height] 382
 @28
 cpu_tb.uut.if_stage.CLK
 cpu_tb.RST
@@ -134,6 +134,24 @@ cpu_tb.uut.id_stage.imm_pick.IMM_PICK[2:0]
 cpu_tb.uut.id_stage.imm_pick.IMMEDIATE[31:0]
 cpu_tb.uut.id_stage.imm_pick.INSTRUCTION[31:0]
 @200
+-MEM_FORWARDING_UNIT
+@22
+cpu_tb.uut.id_stage.mem_forwarding_unit.ADDR1[4:0]
+cpu_tb.uut.id_stage.mem_forwarding_unit.ADDR2[4:0]
+@28
+cpu_tb.uut.id_stage.mem_forwarding_unit.FORWARD_EN[1:0]
+@22
+cpu_tb.uut.id_stage.mem_forwarding_unit.STAGE_RD[4:0]
+@200
+-WB_FORWARDING_UNIT
+@22
+cpu_tb.uut.id_stage.wb_forwarding_unit.ADDR1[4:0]
+cpu_tb.uut.id_stage.wb_forwarding_unit.ADDR2[4:0]
+@29
+cpu_tb.uut.id_stage.wb_forwarding_unit.FORWARD_EN[1:0]
+@22
+cpu_tb.uut.id_stage.wb_forwarding_unit.STAGE_RD[4:0]
+@200
 -
 -ID_EX
 @28
@@ -162,9 +180,8 @@ cpu_tb.uut.id_ex.ID_MEM_READ
 cpu_tb.uut.id_ex.EX_MEM_READ
 cpu_tb.uut.id_ex.ID_MEM_WRITE
 cpu_tb.uut.id_ex.EX_MEM_WRITE
-@25
-cpu_tb.uut.id_ex.ID_PC[31:0]
 @24
+cpu_tb.uut.id_ex.ID_PC[31:0]
 cpu_tb.uut.id_ex.EX_PC[31:0]
 @22
 cpu_tb.uut.id_ex.ID_PC_PLUS4[31:0]

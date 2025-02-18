@@ -1,6 +1,10 @@
 module EX (
     input wire CLK,
     input wire RST,
+    input wire [1:0] ID_MEM_FORWARD_EN,
+    input wire [1:0] ID_WB_FORWARD_EN,
+    input wire [31:0] WB_RD_DATA,
+    input wire [31:0] MEM_RD_DATA,
     input wire [31:0] ID_PC,
     input wire [31:0] ID_PC_PLUS4,
     input wire [31:0] ID_READ_DATA1,
@@ -31,11 +35,39 @@ module EX (
     output wire BRANCH_PIPLINE_RESET
 );
     // Internal signals
-    wire [31:0] PC_SELECTED, IMM_SELECTED, ALU_RESULT;
+    wire [31:0] PC_SELECTED, IMM_SELECTED, ALU_RESULT, OUT1_FORWARD_DATA, OUT2_FORWARD_DATA, FORWARD_SELECTED_READ_DATA1, FORWARD_SELECTED_READ_DATA2;
+    wire OUT1_FORWARD_EN, OUT2_FORWARD_EN;
+
+    FORWARDING_CONTROL_UNIT forwarding_control_unit (
+        .WB_FORWARD_EN(ID_WB_FORWARD_EN),
+        .MEM_FORWARD_EN(ID_MEM_FORWARD_EN),
+        .WB_RD_DATA(WB_RD_DATA), // directly from WB
+        .MEM_RD_DATA(MEM_RD_DATA), // directly from MEM
+        .OUT1_FORWARD_EN(OUT1_FORWARD_EN),
+        .OUT2_FORWARD_EN(OUT2_FORWARD_EN),
+        .OUT1_FORWARD_DATA(OUT1_FORWARD_DATA),
+        .OUT2_FORWARD_DATA(OUT2_FORWARD_DATA)
+    );
+
+    // Out 1 Forwarding Mux
+    MUX out1_forwarding_mux (
+        .IN0(ID_READ_DATA1),
+        .IN1(OUT1_FORWARD_DATA),
+        .SEL(OUT1_FORWARD_EN),
+        .OUT(FORWARD_SELECTED_READ_DATA1)/////
+    );
+
+    // Out 2 Forwarding Mux
+    MUX out2_forwarding_mux (
+        .IN0(ID_READ_DATA2),
+        .IN1(OUT2_FORWARD_DATA),
+        .SEL(OUT2_FORWARD_EN),
+        .OUT(FORWARD_SELECTED_READ_DATA2)/////
+    );
 
     // Immediate Select Mux
     MUX imm_select (
-        .IN0(ID_READ_DATA2),
+        .IN0(FORWARD_SELECTED_READ_DATA2),
         .IN1(ID_IMMEDIATE),
         .SEL(ID_IMM_SELECT),
         .OUT(IMM_SELECTED)
@@ -43,7 +75,7 @@ module EX (
 
     // PC Select Mux
     MUX pc_select (
-        .IN0(ID_READ_DATA1),
+        .IN0(FORWARD_SELECTED_READ_DATA1),
         .IN1(ID_PC),
         .SEL(ID_PC_SELECT),
         .OUT(PC_SELECTED)
@@ -70,8 +102,8 @@ module EX (
         .JUMP(ID_JUMP),
         .BRANCH(ID_BRANCH),
         .FUNC3(ID_FUNC3),
-        .OUT1(ID_READ_DATA1),
-        .OUT2(ID_READ_DATA2),
+        .OUT1(FORWARD_SELECTED_READ_DATA1),
+        .OUT2(FORWARD_SELECTED_READ_DATA2),
         .ALU_RESULT(ALU_RESULT),
         .TARGET_ADDRESS(EX_PC_TARGET),
         .BRANCH_SELECT(EX_BRANCH_SELECT),
@@ -79,7 +111,7 @@ module EX (
     );
 
     // Output assignments
-    assign EX_READ_DATA2 = ID_READ_DATA2;
+    assign EX_READ_DATA2 = FORWARD_SELECTED_READ_DATA2;
     assign EX_RD = ID_RD;
     assign EX_FUNC3 = ID_FUNC3;
     assign EX_WRITE_ENABLE = ID_WRITE_ENABLE;

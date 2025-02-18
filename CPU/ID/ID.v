@@ -7,6 +7,8 @@ module ID (
     input wire [31:0] WB_WRITE_DATA,
     input wire WB_WRITE_ENABLE,
     input wire [4:0] WB_RD,
+    input wire [4:0] EX_RD,
+    input wire [4:0] MEM_RD,
     output wire [31:0] ID_PC,
     output wire [31:0] ID_PC_PLUS4,
     output wire [31:0] ID_READ_DATA1,
@@ -23,11 +25,29 @@ module ID (
     output wire ID_IMM_SELECT,
     output wire ID_PC_SELECT,
     output wire ID_BRANCH,
-    output wire ID_JUMP
+    output wire ID_JUMP,
+    output wire [1:0] ID_MEM_FORWARD_EN,
+    output wire [1:0] ID_WB_FORWARD_EN
 );
 
     wire [2:0] IMM_PICK;
     wire [2:0] ALU_OP;
+
+    // Mem Forwarding unit
+    FORWARDING_UNIT mem_forwarding_unit (
+        .ADDR1(IF_INSTRUCTION[19:15]),
+        .ADDR2(IF_INSTRUCTION[24:20]),
+        .STAGE_RD(EX_RD), // RD from previous stage
+        .FORWARD_EN(ID_MEM_FORWARD_EN)
+    );
+
+    // Wb Forwarding unit
+    FORWARDING_UNIT wb_forwarding_unit (
+        .ADDR1(IF_INSTRUCTION[19:15]),
+        .ADDR2(IF_INSTRUCTION[24:20]),
+        .STAGE_RD(MEM_RD), // RD from previous stage
+        .FORWARD_EN(ID_WB_FORWARD_EN)
+    );
 
     // Control Unit
     CONTROL_UNIT control_unit (
