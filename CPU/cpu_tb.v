@@ -54,6 +54,6 @@ module cpu_tb;
 endmodule
 
 // command to run simulation
-// iverilog -o cpu_tb.vvp cpu_tb.v cpu.v IF/IF.v ID/ID.v EX/EX.v MEM/MEM.v WB/WB.v ../PipelineRegisters/IF_ID.v ../PipelineRegisters/ID_EX.v ../PipelineRegisters/EX_MEM.v ../PipelineRegisters/MEM_WB.v ../ProgramCounter/ProgramCounter.v ../InstructionMemory/InstructionMemory.v ../DataMemory/DataMemory.v ../Registers/RegisterFile.v ../ALU/ALU.v ../BranchControlUnit/branch_control_unit.v ../ControlUnit/control_unit.v ../LoadProcessingUnit/load_processing_unit.v ../MUX/MUX.v ../ImmidiatePick/Imm_pick.v ../Alu_ctrl/alu_ctrl.v ../RDSelector/rd_selector.v ../ForwardingUnit/forwarding_unit.v ../ForwardingControlUnit/forwarding_control_unit.v
+// iverilog -o cpu_tb.vvp cpu_tb.v cpu.v IF/IF.v ID/ID.v EX/EX.v MEM/MEM.v WB/WB.v ../PipelineRegisters/IF_ID.v ../PipelineRegisters/ID_EX.v ../PipelineRegisters/EX_MEM.v ../PipelineRegisters/MEM_WB.v ../ProgramCounter/ProgramCounter.v ../InstructionMemory/InstructionMemory.v ../DataMemory/DataMemory.v ../Registers/RegisterFile.v ../ALU/ALU.v ../BranchControlUnit/branch_control_unit.v ../ControlUnit/control_unit.v ../LoadProcessingUnit/load_processing_unit.v ../MUX/MUX.v ../ImmidiatePick/Imm_pick.v ../Alu_ctrl/alu_ctrl.v ../ForwardingUnit/forwarding_unit.v ../ForwardingControlUnit/forwarding_control_unit.v
 // vvp cpu_tb.vvp
 // gtkwave cpu_tb.vcd
